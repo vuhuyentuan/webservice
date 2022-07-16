@@ -28,7 +28,7 @@ class ServicePackController extends Controller
            return DataTables::of($service_accounts)
                 ->addColumn('action' , function($row){
                     $html = '<button type="button" data-href="'.route('service_pack.edit', $row->id).'" class="btn btn-outline-info btn-not-radius modal-btn edit_service_pack"><i class="fa fa-edit"></i></button>&nbsp;
-                                            <button type="button" data-href="'.route('service_pack.destroy', $row->id).'" data-name="'.$row->account.'" class="btn btn-outline-danger btn-not-radius delete-btn delete_service_pack btn-hover" ><i class="fa fa-trash"></i></button>';
+                                            <button type="button" data-href="'.route('service_pack.destroy', $row->id).'" data-name="'.$row->name.'" class="btn btn-outline-danger btn-not-radius delete-btn delete_service_pack btn-hover" ><i class="fa fa-trash"></i></button>';
                     return $html;
                 })
                 ->addColumn('addon' , function($row){
@@ -44,11 +44,11 @@ class ServicePackController extends Controller
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <div class="form-check">
-                                        <input class="form-check-input" type="checkbox"'.$comment.'>
+                                        <input class="form-check-input" type="checkbox"'.$comment.' onchange="updateForm(this, '.$row->id.')" value="comment">
                                         <label class="form-check-label"><b>Hiển thị ô nhập comment</b></label>
                                         </div>
                                         <div class="form-check">
-                                        <input class="form-check-input" type="checkbox"'.$feeling.'>
+                                        <input class="form-check-input" type="checkbox"'.$feeling.' onchange="updateForm(this, '.$row->id.')" value="feeling">
                                         <label class="form-check-label"><b>Hiển thị ô chọn cảm xúc</b></label>
                                         </div>
                                     </div>
@@ -122,7 +122,8 @@ class ServicePackController extends Controller
      */
     public function edit($id)
     {
-        //
+        $service_pack = $this->repository->getServicePackId($id);
+        return view('admin.service_pack.edit', compact('service_pack'));
     }
 
     /**
@@ -132,9 +133,20 @@ class ServicePackController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        try {
+            $this->repository->update($request);
+            return response()->json([
+                'success' => true,
+                'msg' => 'Cập nhật gói dịch vụ thành công'
+            ],200);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'msg' => 'Đã xảy ra lỗi'
+            ]);
+        }
     }
 
     /**
@@ -145,6 +157,33 @@ class ServicePackController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $this->repository->delete($id);
+            return response()->json([
+                'success' => true,
+                'msg' => 'Xóa gói dịch vụ thành công'
+            ],200);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'msg' => 'Đã xảy ra lỗi'
+            ]);
+        }
+    }
+
+    public function updateForm(Request $request)
+    {
+        try {
+            $this->repository->updateForm($request);
+            return response()->json([
+                'success' => true,
+                'msg' => 'Cập nhật thành công'
+            ],200);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'msg' => 'Đã xảy ra lỗi'
+            ]);
+        }
     }
 }

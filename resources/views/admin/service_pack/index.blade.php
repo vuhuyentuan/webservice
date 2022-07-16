@@ -92,9 +92,9 @@
         });
     });
 
-    $(document).on('click', '.edit_service', function(e) {
+    $(document).on('click', '.edit_service_pack', function(e) {
         e.preventDefault();
-        $('div.service_modal').load($(this).attr('data-href'), function() {
+        $('div.service_pack_modal').load($(this).attr('data-href'), function() {
             $(this).modal('show');
         });
     });
@@ -158,11 +158,11 @@
     })
 
     // delete
-    $(document).on('click', '.delete_service_account', function(e) {
+    $(document).on('click', '.delete_service_pack', function(e) {
         let name = $(this).data('name');
-        var id = $(this).data('id');
+        let url = $(this).data('href');
         Swal.fire({
-            title: LANG.delete_confirm.replace('name', name),
+            title: 'Bạn muốn xóa gói ' +name,
             icon: 'warning',
             showCancelButton: true,
             cancelButtonColor: '#d33',
@@ -173,10 +173,7 @@
         if (result.value) {
             $.ajax({
                 method: "GET",
-                url: "#",
-                data: {
-                    id: id
-                },
+                url: url,
                 dataType: "json",
                 success: function(result) {
                     if (result.success == true) {
@@ -184,7 +181,7 @@
                     }else{
                         toastr.error(result.msg);
                     }
-                    service_pack_table.ajax.reload();
+                    service_pack_table.ajax.reload(null, false);
                 }
             })
         }
@@ -192,22 +189,23 @@
     });
 });
 
-$('#service_pack_modal').on('shown.bs.modal', function (e) {
-    function formatNumber(num) {
-        var n = Number(num.replace(/,/g, ''));
-        return n.toLocaleString("en");
-    }
-    $('.price').on('keyup', function() {
-        var num = $(this).val().replace(/[^0-9]+/i, '');
-
-        if (num != '') {
-            let money = formatNumber(num);
-
-            $(this).val(money)
-        } else {
-            $(this).val(0)
+function updateForm(el, id){
+        let status = 'hide';
+        if(el.checked){
+            status = 'show';
         }
-    });
-})
-
+        $.ajax({
+            method: 'POST',
+            url: "{{ route('service_pack.update_form') }}",
+            data: {
+                id: id,
+                name: el.value,
+                status: status,
+            },
+            success: function(result) {
+                toastr.success(result.msg);
+                $('#service_pack_table').DataTable().ajax.reload(null, false);
+            }
+        })
+    }
 </script>

@@ -37,7 +37,7 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label class="form-control-label" for="basic-url">Mua tối thiểu<b class="text-danger">*</b></label>
-                            <input type="text" class="form-control" name="min" value="1" min="1">
+                            <input type="text" class="form-control" name="min" value="1">
                         </div>
                     </div>
                 </div>
@@ -67,17 +67,42 @@
     </div>
 </div>
 <script>
-$('form#service_pack_add_form').validate({
+    function formatNumber(num) {
+        var n = Number(num.replace(/,/g, ''));
+        return n.toLocaleString("en");
+    }
+    $('.price').on('keyup', function() {
+        var num = $(this).val().replace(/[^0-9]+/i, '');
+
+        if (num != '') {
+            let money = formatNumber(num);
+
+            $(this).val(money)
+        } else {
+            $(this).val(0)
+        }
+    });
+    $('form#service_pack_add_form').validate({
         rules: {
             "name": {
                 required: true,
                 maxlength: 190
+            },
+            "min": {
+                required: true,
+                number: true,
+                min: 1
             }
         },
         messages: {
             "name": {
                 required: 'Vui lòng không để trống',
                 maxlength: 'Giới hạn 190 ký tự'
+            },
+            "min": {
+                required: 'Vui lòng không để trống',
+                number: 'Chỉ được nhập số',
+                min: 'Giá trị phải lớn hơn 1'
             }
         }
     });

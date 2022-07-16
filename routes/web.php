@@ -57,6 +57,7 @@ Route::group(['middleware' => 'user'], function () {
     Route::get('/services/destroy/{id}',[ServiceController::class,'destroy'])->name('services.destroy');
     Route::get('/services',[ServiceController::class,'index'])->name('services.index');
     //service pack
+    Route::post('/service-pack/update-form',[ServicePackController::class,'updateForm'])->name('service_pack.update_form');
     Route::get('/service-pack/create',[ServicePackController::class,'create'])->name('service_pack.create');
     Route::post('/service-pack/store',[ServicePackController::class,'store'])->name('service_pack.store');
     Route::get('/service-pack/{id}/edit',[ServicePackController::class,'edit'])->name('service_pack.edit');

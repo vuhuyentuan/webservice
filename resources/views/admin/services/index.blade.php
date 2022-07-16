@@ -151,7 +151,7 @@
      // delete
      $(document).on('click', '.delete_service', function(e) {
         let name = $(this).data('name');
-        var url = $(this).data('href');
+        let url = $(this).data('href');
         Swal.fire({
             title: 'Bạn muốn xóa dịch vụ ' +name,
             icon: 'warning',

@@ -14,12 +14,12 @@ class ServicePackRepository
      */
     public function getServicePack($request)
     {
-        return ServicePack::where('service_id', $request->id);
+        return ServicePack::where('service_id', $request->id)->orderby('id', 'desc');
     }
 
-    public function getServicePackId($request)
+    public function getServicePackId($id)
     {
-        return ServicePack::find($request->id);
+        return ServicePack::find($id);
     }
 
     public function create($request)
@@ -36,14 +36,29 @@ class ServicePackRepository
 
     public function update($request)
     {
-        $service_account = ServicePack::find($request->id);
-        $service_account->account = $request->data_account;
-        $service_account->save();
+        $service_pack = ServicePack::find($request->id);
+        $service_pack->name = $request->name;
+        $service_pack->price = str_replace(',','',$request->price);
+        $service_pack->min = $request->min;
+        $service_pack->description = $request->description;
+        $service_pack->status = $request->status;
+        $service_pack->save();
     }
 
-    public function delete($request)
+    public function updateForm($request)
     {
-        return ServicePack::find($request->id)->delete();
+        $service_pack = ServicePack::find($request->id);
+        if ($request->name == 'comment') {
+            $service_pack->comment = $request->status;
+        }elseif($request->name == 'feeling'){
+            $service_pack->feeling = $request->status;
+        }
+        $service_pack->save();
+    }
+
+    public function delete($id)
+    {
+        return ServicePack::find($id)->delete();
     }
 
 }

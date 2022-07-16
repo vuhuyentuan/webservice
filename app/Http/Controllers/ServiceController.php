@@ -140,8 +140,8 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        return $this->repository->destroy($request);
+        return $this->repository->destroy($id);
     }
 }

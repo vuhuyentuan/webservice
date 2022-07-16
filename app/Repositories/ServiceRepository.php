@@ -85,11 +85,10 @@ class ServiceRepository
         $service->save();
     }
 
-    public function destroy($request)
+    public function destroy($id)
     {
-        $service = Service::find($request->id);
+        $service = Service::find($id);
         $count = ServicePack::where('service_id', $service->id)->count();
-
         if ($count == 0) {
             $service->delete();
             return response()->json([

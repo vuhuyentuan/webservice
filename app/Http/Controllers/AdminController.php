@@ -84,6 +84,6 @@ class AdminController extends Controller
             'arrRevenueMonthPending'    => json_encode($arrRevenueMonthPending),
             'totalRevenueFromToDate'    => $totalRevenueFromToDate
         ];
-        return view('admin.index');
+        return view('admin.index', $viewData);
     }
 }
