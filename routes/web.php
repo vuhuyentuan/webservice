@@ -64,4 +64,11 @@ Route::group(['middleware' => 'user'], function () {
     Route::post('/service-pack/update',[ServicePackController::class,'update'])->name('service_pack.update');
     Route::get('/service-pack/destroy/{id}',[ServicePackController::class,'destroy'])->name('service_pack.destroy');
     Route::get('/service-pack',[ServicePackController::class,'index'])->name('service_pack.index');
+    //recharge history
+    Route::get('/recharges-history',[AdminController::class,'getRechargeHistory'])->name('recharges.history');
+    //purchase history
+    Route::get('/purchases-history',[AdminController::class,'history'])->name('purchases.history');
 });
+
+//transaction
+Route::post('handler-bank-transfer',[FrontendController::class,'transtionInfo'])->name('transtion.info');

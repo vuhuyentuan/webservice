@@ -66,7 +66,13 @@
             </ul>
         </li>
         <li class="nav-item">
-            <a href="{{ route('users.index') }}" class="nav-link">
+            <a href="{{ route('recharges.history') }}" class="nav-link {{ URL::current() == route('users.index') ? 'active' : '' }}">
+                <i class="nav-icon fa fa-money-bill"></i>
+                <p>Lịch sử nạp tiền</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('users.index') }}" class="nav-link {{ URL::current() == route('users.index') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-user"></i>
                 <p>Thành viên</p>
             </a>
