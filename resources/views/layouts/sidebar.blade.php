@@ -86,18 +86,26 @@
         </li>
         @endcan
         @can('user')
+        <li class="nav-header">MENU</li>
         <li class="nav-item">
             <a href="{{ route('user.dashboard') }}" class="nav-link {{ URL::current() == route('user.dashboard') ? 'active' : '' }}">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <img src="{{ asset('AdminLTE-3.1.0/dist/icon/icon-house.png') }}" width="30px" height="30px" class="img-circle elevation-2">&nbsp;
                 <p>Trang chủ</p>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('recharge') }}" class="nav-link {{ URL::current() == route('recharge') ? 'active' : '' }}">
+                <img src="{{ asset('AdminLTE-3.1.0/dist/icon/icon-payment.png') }}" width="30px" height="30px" class="img-circle elevation-2">&nbsp;
+                <p>Nạp tiền</p>
+            </a>
+        </li>
+        <li class="nav-header">DỊCH VỤ</li>
         @foreach ($category as $cate)
             @if($cate->status == 'show')
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     @if($cate->image)
-                        <img src="{{ asset($cate->image) }}" width="30px" height="30px" class="img-circle elevation-2">
+                        <img src="{{ asset($cate->image) }}" width="30px" height="30px" class="img-circle elevation-2">&nbsp;
                     @else
                         <i class="far fa-circle nav-icon"></i>
                     @endif
@@ -112,7 +120,7 @@
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             @if($service->image)
-                                <img src="{{ asset($service->image) }}" width="28px" height="28px" class="img-circle elevation-2">
+                                <img src="{{ asset($service->image) }}" width="28px" height="28px" class="img-circle elevation-2">&nbsp;
                             @else
                                 <i class="far fa-circle nav-icon"></i>
                             @endif
@@ -125,6 +133,13 @@
             </li>
             @endif
         @endforeach
+        <li class="nav-header">KHÁC</li>
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <img src="{{ asset('AdminLTE-3.1.0/dist/icon/icon-contact.png') }}" width="30px" height="30px" class="img-circle elevation-2">&nbsp;
+                <p>Liên hệ</p>
+            </a>
+        </li>
         @endcan
         </ul>
     </nav>

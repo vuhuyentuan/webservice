@@ -18,8 +18,8 @@ class CreateBanksTable extends Migration
             $table->string('account_name', 255);
             $table->bigInteger('account_number');
             $table->string('bank_name', 255);
-            $table->string('branch', 255);
-            $table->string('image', 255);
+            $table->string('branch', 255)->nullable();
+            $table->string('image', 255)->nullable();
             $table->timestamps();
         });
     }
