@@ -73,5 +73,15 @@ Route::group(['middleware' => 'user'], function () {
     Route::resource('banks', BanksController::class);
 });
 
+Route::group(['middleware' => 'login'], function () {
+    //user info
+    Route::get('/user-dashboard',[UserController::class,'userDashboard'])->name('user.dashboard');
+    Route::post('/info-update/{id}',[UserController::class,'updateInfo'])->name('info.update');
+    Route::get('/amount',[UserController::class,'getAmount'])->name('amount');
+    //Recharge
+    Route::get('/recharge',[UserController::class,'recharge'])->name('recharge');
+    Route::get('/recharge-history',[UserController::class,'getRechargeHistory'])->name('recharge.history');
+});
+
 //transaction
 Route::post('handler-bank-transfer',[FrontendController::class,'transtionInfo'])->name('transtion.info');

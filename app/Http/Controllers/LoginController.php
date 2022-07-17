@@ -43,7 +43,7 @@ class LoginController extends Controller
             if (Auth::user()->role == 1) {
                 return redirect()->route('dashboard');
             } else {
-                return redirect()->route('info');
+                return redirect()->route('user.dashboard');
             }
         } else {
             return redirect()->back()->with('message', 1);

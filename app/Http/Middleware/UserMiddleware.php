@@ -19,7 +19,7 @@ class UserMiddleware
     {
         if(Auth::check()){
             if(Auth::user()->role == 0){
-                return redirect(route('info'));
+                return redirect(route('user.dashboard'));
             }
             return $next($request);
         }else{

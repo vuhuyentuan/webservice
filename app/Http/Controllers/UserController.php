@@ -98,5 +98,8 @@ class UserController extends Controller
         ]);
     }
 
-
+    public function userDashboard()
+    {
+        return view('users.index');
+    }
 }

@@ -30,6 +30,7 @@
                 $active = 'active';
             }
         @endphp
+        @can('admin')
         <li class="nav-item">
             <a href="{{ route('dashboard') }}" class="nav-link {{ URL::current() == route('dashboard') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -83,6 +84,48 @@
                 <p>Tài khoản ngân hàng</p>
             </a>
         </li>
+        @endcan
+        @can('user')
+        <li class="nav-item">
+            <a href="{{ route('user.dashboard') }}" class="nav-link {{ URL::current() == route('user.dashboard') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>Trang chủ</p>
+            </a>
+        </li>
+        @foreach ($category as $cate)
+            @if($cate->status == 'show')
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    @if($cate->image)
+                        <img src="{{ asset($cate->image) }}" width="30px" height="30px" class="img-circle elevation-2">
+                    @else
+                        <i class="far fa-circle nav-icon"></i>
+                    @endif
+                <p>
+                    {{ $cate->name }}
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    @foreach ($cate->service as $service)
+                    @if($service->status == 'show')
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            @if($service->image)
+                                <img src="{{ asset($service->image) }}" width="28px" height="28px" class="img-circle elevation-2">
+                            @else
+                                <i class="far fa-circle nav-icon"></i>
+                            @endif
+                        <p>{{ $service->name }}</p>
+                        </a>
+                    </li>
+                    @endif
+                    @endforeach
+                </ul>
+            </li>
+            @endif
+        @endforeach
+        @endcan
         </ul>
     </nav>
     <!-- /.sidebar-menu -->
