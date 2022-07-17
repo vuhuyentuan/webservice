@@ -10,7 +10,7 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-        <img src="{{ asset('AdminLTE-3.1.0/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+        <img src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
         <a href="#" class="d-block">Alexander Pierce</a>
@@ -58,7 +58,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('order.history') }}" class="nav-link {{ URL::current() == route('order.history') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Đơn hàng</p>
                 </a>
@@ -66,7 +66,7 @@
             </ul>
         </li>
         <li class="nav-item">
-            <a href="{{ route('recharges.history') }}" class="nav-link {{ URL::current() == route('users.index') ? 'active' : '' }}">
+            <a href="{{ route('recharges.history') }}" class="nav-link {{ URL::current() == route('recharges.history') ? 'active' : '' }}">
                 <i class="nav-icon fa fa-money-bill"></i>
                 <p>Lịch sử nạp tiền</p>
             </a>
