@@ -27,7 +27,7 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label class="form-control-label" for="basic-url">Tên ngân hàng</label><b class="text-danger">*</b>
-                            <input type="text" class="form-control" name="bank_name" id="bank_name" placeholder="Số tài khoản">
+                            <input type="text" class="form-control" name="bank_name" id="bank_name" placeholder="Tên ngân hàng">
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -40,7 +40,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="form-control-label" for="basic-url">Hình ảnh</label> <br>
+                            <label class="form-control-label" for="basic-url">Logo</label> <br>
                             <div class="input-group">
                                 <input id="fImages" type="file" name="image" class="form-control" style="display: none" accept="image/gif, image/jpeg, image/png" onchange="changeImg(this)">
                                 <img id="img" class="img" style="width: 100px; height: 100px;" src="{{ asset('AdminLTE-3.1.0/dist/img/no_img.jpg') }}">
@@ -78,6 +78,7 @@
             },
             "account_number": {
                 required: true,
+                number: true,
                 maxlength: 20
             },
             "bank_name": {
@@ -96,6 +97,7 @@
             },
             "account_number": {
                 required: 'Vui lòng không để trống',
+                number: 'Số tài khoản phải là số',
                 maxlength: 'Giới hạn 20 ký tự'
             },
             "bank_name": {
@@ -139,7 +141,7 @@
                         $('#account-number-error').html('');
                         $.each(err.responseJSON.errors, function(i, error) {
                             if(i == 'account_number'){
-                                $(document).find('[name="' + i + '"]').after($('<span id="account-number-error" class="error">' + error + '</span>'));
+                                $(document).find('[name="' + i + '"]').after($('<label id="account-number-error" class="error">' + error + '</label>'));
                             }
                         });
                     }

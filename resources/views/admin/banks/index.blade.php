@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    <title>Tài khoản bank</title>
+    <title>Tài khoản ngân hàng</title>
 @endsection
 @section('style')
 <style>

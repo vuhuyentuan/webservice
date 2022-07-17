@@ -78,6 +78,7 @@
             },
             "account_number": {
                 required: true,
+                number: true,
                 maxlength: 20
             },
             "bank_name": {
@@ -96,7 +97,8 @@
             },
             "account_number": {
                 required: 'Vui lòng không để trống',
-                maxlength: 'Giới hạn 20 ký tự'
+                number: 'Số tài khoản phải là số',
+                maxlength: 'Giới hạn 20 ký tự',
             },
             "bank_name": {
                 required: 'Vui lòng không để trống',
@@ -135,12 +137,6 @@
                     }
                 },
                 error: function(err) {
-                    if (err.status == 422) {
-                        $('#category-error').html('');
-                        $.each(err.responseJSON.errors, function(i, error) {
-                            $(document).find('[name="' + i + '"]').after($('<span id="category-error" class="error">' + error + '</span>'));
-                        });
-                    }
                     $('.submit_edit').attr('disabled', false);
                 }
             });
