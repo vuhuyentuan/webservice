@@ -149,7 +149,7 @@ class AdminController extends Controller
                     return $html;
                 })
                 ->editColumn('amount', '+ {{@number_format($amount)}} đ')
-                ->editColumn('created_at', '{{date("d/m/Y H:i", strtotime($created_at))}}')
+                ->editColumn('created_at', '{{date("d/m/Y", strtotime($created_at))}}')
                 ->rawColumns(['avatar', 'status'])
                 ->make(true);;
         }
@@ -171,7 +171,14 @@ class AdminController extends Controller
                             ->whereDate('service_bills.created_at', '<=', $end);
             }
             return DataTables::of($service_bills)
-                ->addColumn('service', '{{$service_name}} - {{$svp_name}}')
+                ->editColumn('image', function($row){
+                    if ($row->image) {
+                        $html = '<img src="'.$row->image.'" width="38px" height="38px" class="rounded-circle avatar">';
+                    }else{
+                        $html = '<img src="'.asset('assets/images/no_img.jpg').'" width="38px" height="38px" class="rounded-circle avatar">';
+                    }
+                    return $html;
+                })
                 ->editColumn('avatar', function($row){
                     $html = '<div class="d-flex px-2 py-1">
                             <div>
@@ -196,21 +203,27 @@ class AdminController extends Controller
 
                     return $html;
                 })
+                ->editColumn('country', function($row){
+                    $html = '';
+                    if ($row->country) {
+                        $html = '<img src="'.asset('assets/flag/'.$row->country.'.png').'"  width="35px" height="25px"  title="'.$row->country_name.'">';
+                    }
+                    return $html;
+                })
+                ->editColumn('account', function($row){
+                    $html = '<button type="button" class="btn btn-outline-info btn-not-radius modal-btn btn-hover" data-toggle="modal" data-target="#view'. $row->id.'"><i class="fa fa-eye"></i></button>';
+                    return $html;
+                })
                 ->editColumn('status', function($row){
-                    $html = '<span class="badge badge-warning">Đang xử lý</span>';
-                    if ($row->status == 'running') {
-                        $html = '<span class="badge badge-info">Đang chạy</span>';
-                    }elseif($row->status == 'completed'){
-                        $html = '<span class="badge badge-success">Hoàn thành</span>';
-                    }elseif($row->status == 'cancel'){
-                        $html = '<span class="badge badge-danger">Đã hủy</span>';
+                    $html = '';
+                    if ($row->status == "completed") {
+                        $html = '<span class="badge badge-success">'. __("successfully") .'</span>';
                     }
 
                     return $html;
                 })
-                ->editColumn('price', '{{@number_format($price)}} đ')
-                ->editColumn('created_at', '{{date("d/m/Y H:i", strtotime($created_at))}}')
-                ->rawColumns(['avatar','status', 'created_at', 'service'])
+                ->editColumn('amount', '{{@number_format($amount)}} đ')
+                ->rawColumns(['image', 'avatar', 'country', 'status', 'account'])
                 ->make(true);;
         }
         return view('admin.purchase_history', compact('service_bills', 'first_day', 'last_day'));

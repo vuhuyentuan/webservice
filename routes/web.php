@@ -66,8 +66,8 @@ Route::group(['middleware' => 'user'], function () {
     Route::get('/service-pack',[ServicePackController::class,'index'])->name('service_pack.index');
     //recharge history
     Route::get('/recharges-history',[AdminController::class,'getRechargeHistory'])->name('recharges.history');
-    //order history
-    Route::get('/order-history',[AdminController::class,'history'])->name('order.history');
+    //purchase history
+    Route::get('/purchases-history',[AdminController::class,'history'])->name('purchases.history');
 });
 
 //transaction

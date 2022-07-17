@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    <title>Đơn hàng</title>
+    <title>Lịch sử nạp tiền</title>
 @endsection
 @section('style')
 <style>
@@ -15,12 +15,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Đơn hàng</h1>
+          <h1 class="m-0">Lịch sử nạp tiền</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Đơn hàng</li>
+            <li class="breadcrumb-item active">Lịch sử nạp tiền</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -56,15 +56,13 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="purchase_history_table" class="table table-bordered table-hover ajax_view">
+                    <table id="recharge_history_table" class="table table-bordered table-hover ajax_view">
                     <thead>
                         <tr>
-                            <th>Khách hàng</th>
                             <th>Mã đơn hàng</th>
-                            <th>Dịch vụ</th>
-                            <th>Số lượng</th>
+                            <th>Khách hàng</th>
                             <th>Số tiền</th>
-                            <th>URL/ID</th>
+                            <th>Nội dung</th>
                             <th>Ngày</th>
                             <th>Trạng thái</th>
                         </tr>
@@ -92,17 +90,17 @@
         });
 
         $(document).on('change', '#date', function(){
-            purchase_history_table.ajax.reload();
+            recharge_history_table.ajax.reload();
         })
 
         var debounceTripDetail = null;
         $('#search-btn').on('input', function(){
             clearTimeout(debounceTripDetail);
             debounceTripDetail = setTimeout(() => {
-                purchase_history_table.search($(this).val()).draw();
+                recharge_history_table.search($(this).val()).draw();
             }, 500);
         });
-        var purchase_history_table =$('#purchase_history_table').DataTable({
+        var recharge_history_table =$('#recharge_history_table').DataTable({
             "destroy": true,
             "lengthChange": false,
             "searching": true,
@@ -135,7 +133,7 @@
                 },
             },
             ajax: {
-                url: "{{ route('order.history') }}",
+                url: "{{ route('recharges.history') }}",
                 data: function(d) {
                     var start = '';
                     var end = '';
@@ -153,12 +151,10 @@
             },
             order: [],
             "columns":[
+                {"data": "order_id", class: 'text-center'  },
                 {"data": "avatar" },
-                {"data": "order_code", class: 'text-center'  },
-                {"data": "url"},
-                {"data": "quantity", class: 'text-center' },
-                {"data": "price", class: 'text-center' },
-                {"data": "url", orderable: false},
+                {"data": "amount", class: 'text-center' },
+                {"data": "description", class: 'text-center' },
                 {"data": "created_at", class: 'text-center' },
                 {"data": "status", class: 'text-center', orderable: false },
             ]
