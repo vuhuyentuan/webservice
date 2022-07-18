@@ -16,7 +16,7 @@
   <!-- Toastr -->
   <link rel="stylesheet" href="{{ asset('AdminLTE-3.1.0/plugins/toastr/toastr.min.css') }}">
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background-image: url('AdminLTE-3.1.0/dist/img/bg7.jpg')">
 <div class="login-box">
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">

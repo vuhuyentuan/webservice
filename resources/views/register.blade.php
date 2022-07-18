@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="{{ asset('AdminLTE-3.1.0/plugins/toastr/toastr.min.css') }}">
   <link rel="stylesheet" href="{{ asset('AdminLTE-3.1.0/dist/css/style.css') }}">
 </head>
-<body class="hold-transition register-page">
+<body class="hold-transition register-page" style="background-image: url('AdminLTE-3.1.0/dist/img/bg7.jpg')">
 <div class="register-box" style="width:450px">
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
