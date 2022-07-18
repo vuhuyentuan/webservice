@@ -52,6 +52,8 @@ class ServicePackRepository
             $service_pack->comment = $request->status;
         }elseif($request->name == 'feeling'){
             $service_pack->feeling = $request->status;
+        }elseif($request->name == 'eyes'){
+            $service_pack->eyes = $request->status;
         }
         $service_pack->save();
     }

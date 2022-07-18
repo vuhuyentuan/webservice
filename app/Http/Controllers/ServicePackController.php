@@ -34,22 +34,30 @@ class ServicePackController extends Controller
                 ->addColumn('addon' , function($row){
                     $comment = '';
                     $feeling = '';
+                    $eyes = '';
                     if ($row->comment == 'show') {
                         $comment = 'checked';
                     }
                     if ($row->feeling == 'show') {
                         $feeling = 'checked';
                     }
+                    if ($row->eyes == 'show') {
+                        $eyes = 'checked';
+                    }
                     $html = '<div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <div class="form-check">
-                                        <input class="form-check-input" type="checkbox"'.$comment.' onchange="updateForm(this, '.$row->id.')" value="comment">
-                                        <label class="form-check-label"><b>Hiển thị ô nhập comment</b></label>
+                                            <input class="form-check-input" type="checkbox"'.$comment.' onchange="updateForm(this, '.$row->id.')" value="comment">
+                                            <label class="form-check-label"><b>Hiển thị ô nhập comment</b></label>
                                         </div>
                                         <div class="form-check">
-                                        <input class="form-check-input" type="checkbox"'.$feeling.' onchange="updateForm(this, '.$row->id.')" value="feeling">
-                                        <label class="form-check-label"><b>Hiển thị ô chọn cảm xúc</b></label>
+                                            <input class="form-check-input" type="checkbox"'.$feeling.' onchange="updateForm(this, '.$row->id.')" value="feeling">
+                                            <label class="form-check-label"><b>Hiển thị ô chọn cảm xúc</b></label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox"'.$eyes.' onchange="updateForm(this, '.$row->id.')" value="eyes">
+                                            <label class="form-check-label"><b>Hiển thị ô chọn mắt</b></label>
                                         </div>
                                     </div>
                                 </div>
