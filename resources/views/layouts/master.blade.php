@@ -119,16 +119,16 @@
 <script src="{{ asset('AdminLTE-3.1.0/dist/js/adminlte.js') }}"></script>
 @yield('script')
 <script>
-    // window.setInterval(function() {
-    //     $.ajax({
-    //         url: '/amount',
-    //         success: function(result){
-    //             result.amount.forEach(element => {
-    //                 $('#surplus').html(`<b>`+LANG.surplus+` : ${element.amount.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}đ</b>`)
-    //             });
-    //         }
-    //     })
-    // }, 20000)
+    window.setInterval(function() {
+        $.ajax({
+            url: '/amount',
+            success: function(result){
+                result.amount.forEach(element => {
+                    $('#surplus').html(`<b>Số dư : ${element.amount.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}đ</b>`)
+                });
+            }
+        })
+    }, 15000)
 </script>
 </body>
 </html>

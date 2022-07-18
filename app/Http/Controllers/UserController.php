@@ -109,6 +109,36 @@ class UserController extends Controller
         return view('users.recharge', compact('banks'));
     }
 
+    public function getAmount()
+    {
+        $user = $this->repository->getAmount();
+        return response()->json([
+            'success' => true,
+            'amount' => $user
+        ]);
+    }
+
+    public function info()
+    {
+        return view('users.info');
+    }
+
+    public function updateInfo(Request $request, $id)
+    {
+        try {
+            $this->repository->updateInfo($request, $id);
+            return response()->json([
+                'success' => true,
+                'msg' => 'Cập nhật thành công'
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'msg' => 'Đã xảy ra lỗi!'
+            ]);
+        }
+    }
+
     public static function utf8convert($str) {
 
         if(!$str) return false;

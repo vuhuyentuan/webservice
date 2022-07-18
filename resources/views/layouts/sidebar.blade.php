@@ -16,17 +16,16 @@
         <a href="#" class="d-block">Alexander Pierce</a>
         </div> --}}
         <div class="image">
-            <img src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}" class="rounded-circle user-photo" alt="User Profile Picture">
+            @if(Auth::user()->avatar)
+                <img src="{{ Auth::user()->avatar }}" class="rounded-circle user-photo" style="width:40px; height:40px">
+            @else
+                <img src="https://ui-avatars.com/api/?name={{ Auth::user()->name }}" class="rounded-circle user-photo" style="width:40px; height:40px">
+            @endif
         </div>&nbsp;&nbsp;&nbsp;
         <div class="dropdown">
-            <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>{{ Auth::user()->name }}</strong></a>
+            <a href="{{ route('info') }}" class="user-name"><strong>{{ Auth::user()->name }}</strong></a>
             <br>
-            <span id="surplus" style="color: #c2c7d0"><b>Số dư: {{ @number_format(Auth::user()->amount) }}đ</b></span>
-            <ul class="dropdown-menu dropdown-menu-right">
-                <li><a href="#"><i class="icon-user"></i>{{ __("info") }}</a></li>
-                <li class="divider"></li>
-                <li><a href="{{ route('logout') }}"><i class="icon-power"></i>{{ __("logout") }}</a></li>
-            </ul>
+            <span id="surplus" style="color: #c2c7d0"><b>Số dư : {{ @number_format(Auth::user()->amount) }}đ</b></span>
         </div>
     </div>
 

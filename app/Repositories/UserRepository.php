@@ -73,25 +73,10 @@ class UserRepository
 
             $user->avatar = $img_name;
         }
-
-        if (Auth::user()->role == 1) {
-            $bank_img = $request->bank_image;
-            if (isset($bank_img)) {
-                if($user->bank_image){
-                    unlink(public_path($user->bank_image));
-                }
-                $bank_img_name = 'upload/bank/img/' . $date . '/' . Str::random(10) . rand() . '.' . $bank_img->getClientOriginalExtension();
-                $destinationPath = public_path('upload/bank/img/' . $date);
-                $bank_img->move($destinationPath, $bank_img_name);
-
-                $user->bank_image = $bank_img_name;
-            }
-            $user->bank_name = $request->bank_name;
-            $user->bank_number = $request->bank_number;
-            $user->bank_branch = $request->bank_branch;
-        }
+        $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
+        $user->password = $request->password ? Hash::make($request->password) : $user->password;
         $user->save();
     }
 

@@ -76,6 +76,7 @@ Route::group(['middleware' => 'user'], function () {
 Route::group(['middleware' => 'login'], function () {
     //user info
     Route::get('/user-dashboard',[UserController::class,'userDashboard'])->name('user.dashboard');
+    Route::get('/info',[UserController::class,'info'])->name('info');
     Route::post('/info-update/{id}',[UserController::class,'updateInfo'])->name('info.update');
     Route::get('/amount',[UserController::class,'getAmount'])->name('amount');
     //Recharge

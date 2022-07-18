@@ -23,7 +23,7 @@ class LoginRepository
             $user->username = $request->username;
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
-            $user->recovery_password =$request->password;
+            // $user->recovery_password =$request->password;
             $user->user_token = Str::random(30);
             $user->save();
             return true;
