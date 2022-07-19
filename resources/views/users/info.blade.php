@@ -27,6 +27,9 @@
           <!-- Profile Image -->
           <div class="card card-primary card-outline">
             <div class="card-body box-profile">
+                @if(Session::has('flag'))
+                    <div class="alert alert-{{Session::get('flag')}}">{{Session::get('messege')}} </div>
+                @endif
                 <form class="form-horizontal" action="{{ route('info.update', Auth::user()->id) }}" method="POST" enctype="multipart/form-data"  id="user_update_form">
                     @csrf
                     <div class="form-group row">
@@ -67,9 +70,9 @@
                         </div>
                       </div>
                     <div class="form-group row">
-                      <div class="offset-sm-2 col-sm-10">
-                        <button type="submit" class="btn btn-danger submit_update">Cập nhật</button>
-                      </div>
+                        <div class="offset-sm-2 col-sm-10">
+                          <button type="submit" class="btn btn-danger submit_update">Cập nhật</button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -142,40 +145,5 @@
             }
         }
     });
-
-    $('form#user_update_form').submit(function(e) {
-        e.preventDefault();
-        if ($('form#user_update_form').valid() == true) {
-            $('.submit_update').attr('disabled', true);
-            var data = new FormData($('#user_update_form')[0]);
-            $.ajax({
-                method: 'POST',
-                url: $(this).attr('action'),
-                dataType: 'json',
-                data: data,
-                contentType: false,
-                processData: false,
-                success: function(result) {
-                    if (result.success == true) {
-                        toastr.success(result.msg);
-                        $('.submit_update').attr('disabled', false);
-                        window.location.reload();
-                    } else {
-                        toastr.error(result.msg);
-                        $('.submit_update').attr('disabled', true);
-                    }
-                },
-                error: function(err) {
-                    $('.submit_update').attr('disabled', false);
-                    $('.error').html();
-                    if (err.status == 422) {
-                        $.each(err.responseJSON.errors, function(i, error) {
-                            $(document).find('[name="' + i + '"]').after($('<span class="error" for="username-error">' + error + '</span>'));
-                        });
-                    }
-                }
-            });
-        }
-    })
 </script>
 @endsection

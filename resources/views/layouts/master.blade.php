@@ -6,6 +6,7 @@
   @yield('title')
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
+  <link rel="icon" type="image/png" href="{{ asset($setting->logo) }}">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -44,7 +45,7 @@
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="{{ asset('AdminLTE-3.1.0/dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo" height="60" width="60">
+    <img class="animation__shake" src="{{ asset($setting->logo) }}" alt="AdminLTELogo" height="60" width="60">
   </div>
 
   <!-- Navbar -->
@@ -119,6 +120,7 @@
 <script src="{{ asset('AdminLTE-3.1.0/dist/js/adminlte.js') }}"></script>
 @yield('script')
 <script>
+    $("div.alert").delay(3000).slideUp();
     window.setInterval(function() {
         $.ajax({
             url: '/amount',

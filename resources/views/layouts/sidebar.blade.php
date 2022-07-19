@@ -1,8 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-    <img src="{{ asset('AdminLTE-3.1.0/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-    <span class="brand-text font-weight-light">AdminLTE 3</span>
+    <img src="{{ asset($setting->logo) }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <span class="brand-text font-weight-light">{{ $setting->logo_text }}</span>
     </a>
 
     <!-- Sidebar -->
@@ -94,6 +94,12 @@
             <a href="{{ route('banks.index') }}" class="nav-link">
                 <i class="fas fa-credit-card nav-icon"></i>
                 <p>Tài khoản ngân hàng</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('settings.index') }}" class="nav-link">
+                <i class="fas fa-cog nav-icon"></i>
+                <p>Cài đặt</p>
             </a>
         </li>
         @endcan

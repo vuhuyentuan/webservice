@@ -127,15 +127,9 @@ class UserController extends Controller
     {
         try {
             $this->repository->updateInfo($request, $id);
-            return response()->json([
-                'success' => true,
-                'msg' => 'Cập nhật thành công'
-            ]);
+            return redirect()->back()->with(['flag'=>'success','messege'=>'Cập nhật thành công']);
         } catch (Exception $e) {
-            return response()->json([
-                'success' => false,
-                'msg' => 'Đã xảy ra lỗi!'
-            ]);
+            return redirect()->back()->with(['flag'=>'danger','messege'=>'Đã xảy ra lỗi!']);
         }
     }
 

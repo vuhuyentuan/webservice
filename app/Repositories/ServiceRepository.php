@@ -4,13 +4,8 @@ namespace App\Repositories;
 
 use App\Models\Category;
 use App\Models\Service;
-use App\Models\ServiceAccounts;
 use App\Models\ServicePack;
-use App\Models\Services;
-use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class ServiceRepository

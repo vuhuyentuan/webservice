@@ -7,6 +7,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServicePackController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BanksController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -71,6 +72,8 @@ Route::group(['middleware' => 'user'], function () {
     Route::get('/order-history',[AdminController::class,'history'])->name('order.history');
     // banks
     Route::resource('banks', BanksController::class);
+    // setting
+    Route::resource('settings', SettingController::class);
 });
 
 Route::group(['middleware' => 'login'], function () {
