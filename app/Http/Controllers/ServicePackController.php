@@ -35,6 +35,7 @@ class ServicePackController extends Controller
                     $comment = '';
                     $feeling = '';
                     $eyes = '';
+                    $vip = '';
                     if ($row->comment == 'show') {
                         $comment = 'checked';
                     }
@@ -43,6 +44,9 @@ class ServicePackController extends Controller
                     }
                     if ($row->eyes == 'show') {
                         $eyes = 'checked';
+                    }
+                    if ($row->vip == 'show') {
+                        $vip = 'checked';
                     }
                     $html = '<div class="row">
                                 <div class="col-sm-12">
@@ -58,6 +62,10 @@ class ServicePackController extends Controller
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox"'.$eyes.' onchange="updateForm(this, '.$row->id.')" value="eyes">
                                             <label class="form-check-label"><b>Hiển thị ô chọn mắt</b></label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox"'.$vip.' onchange="updateForm(this, '.$row->id.')" value="vip">
+                                            <label class="form-check-label"><b>Hiển thị ô chọn viplike</b></label>
                                         </div>
                                     </div>
                                 </div>

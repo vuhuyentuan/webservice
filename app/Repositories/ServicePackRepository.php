@@ -54,6 +54,8 @@ class ServicePackRepository
             $service_pack->feeling = $request->status;
         }elseif($request->name == 'eyes'){
             $service_pack->eyes = $request->status;
+        }elseif($request->name == 'vip'){
+            $service_pack->vip = $request->status;
         }
         $service_pack->save();
     }
