@@ -100,7 +100,8 @@ class UserController extends Controller
 
     public function userDashboard()
     {
-        return view('users.index');
+        $category = $this->repository->userDashboard();
+        return view('users.index', compact('category'));
     }
 
     public function recharge()

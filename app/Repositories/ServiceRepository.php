@@ -50,6 +50,7 @@ class ServiceRepository
         }
         $service->name = $request->name;
         $service->slug = Str::slug($request->name);
+        $service->status = $request->status;
         $service->category_id = $request->category_id;
         $service->description = $request->description;
         $service->save();
@@ -77,6 +78,7 @@ class ServiceRepository
             $service->category_id = $request->category_id;
         }
         $service->description = $request->description;
+        $service->status = $request->status;
         $service->save();
     }
 

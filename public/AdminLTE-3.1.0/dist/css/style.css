@@ -14,6 +14,10 @@ table.ajax_view tbody tr{
     cursor: pointer;
 }
 
+.ajax_view{
+  cursor: pointer;
+}
+
 div.slide{
     display: none;
 }
@@ -35,52 +39,73 @@ table.dataTable tbody td.no-padding {
 }
 /* Modal import excel */
 .input-file-excel {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-  }
-  .input-file-excel + label {
-      background: transparent;
-      color:Green;
-      padding: 5px 10px;
-      border: 1px solid green;
-      border-radius: 5px;
-      cursor: pointer;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.input-file-excel + label {
+    background: transparent;
+    color:Green;
+    padding: 5px 10px;
+    border: 1px solid green;
+    border-radius: 5px;
+    cursor: pointer;
 
-  }
+}
 
-  .input-file-excel:focus + label,
-  .input-file-excel + label:hover {
-        color:#fff;
-        background-color: green;
-        transition: all .2s linear;
-  }
-  .info-box{
-      min-height:130px;
-      color:#212529;
-  }
-  .info-box .info-box-icon{
-      min-width: 100px;
-  }
-  .info-box:hover {
-    background: rgba(0,0,0,0.05);
+.input-file-excel:focus + label,
+.input-file-excel + label:hover {
+      color:#fff;
+      background-color: green;
+      transition: all .2s linear;
+}
+.info-box{
+    min-height:130px;
     color:#212529;
-    font-size: 1.2rem!important;
-    transition: all linear 0.1s;
+}
+.info-box .info-box-icon{
+    min-width: 100px;
+}
+.info-box:hover {
+  background: rgba(0,0,0,0.05);
+  color:#212529;
+  font-size: 1.2rem!important;
+  transition: all linear 0.1s;
 
-  }
-  .info-box:hover .info-box-icon img{
-      /* transform: rotate(turn); */
-      animation: inforboxHover 0.5s linear;
-  }
-  /* End modal inport excel */
+}
+.info-box:hover .info-box-icon img{
+    /* transform: rotate(turn); */
+    animation: inforboxHover 0.5s linear;
+}
+/* End modal inport excel */
 
-  .checkbox:checked + img {
-    border: 3px solid #21da11;
-    position: relative;
-    top: -3px;
-    transform: scale(1.2);
-  }
+.checkbox:checked + img {
+  border: 3px solid #21da11;
+  position: relative;
+  top: -3px;
+  transform: scale(1.2);
+}
+/* End modal inport excel */
+.coming-soon-text {
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 3px 4px #0ab39c;
+}
+.py-4 {
+    padding-top: 1.5rem!important;
+    padding-bottom: 1.5rem!important;
+}
+.bg-soft-success {
+    background-color: rgba(10,179,156,.18)!important;
+}
+.fw-semibold {
+  font-weight: 600!important;
+}
+
+.mb-0 {
+  margin-bottom: 0!important;
+}

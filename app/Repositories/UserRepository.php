@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Bank;
+use App\Models\Category;
 use App\Models\User;
 use App\Models\UserTransaction;
 use Carbon\Carbon;
@@ -102,5 +103,12 @@ class UserRepository
                         ])
                         ->orderBy('id', 'desc');
         return $recharge_histories;
+    }
+
+    public function userDashboard()
+    {
+        return Category::select('id', 'name', 'image', 'status')
+                        ->with('service','service.service_pack')
+                        ->get();
     }
 }

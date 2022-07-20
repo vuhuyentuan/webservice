@@ -52,12 +52,12 @@ class ServicePackController extends Controller
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox"'.$comment.' onchange="updateForm(this, '.$row->id.')" value="comment">
-                                            <label class="form-check-label"><b>Hiển thị ô nhập comment</b></label>
-                                        </div>
-                                        <div class="form-check">
                                             <input class="form-check-input" type="checkbox"'.$feeling.' onchange="updateForm(this, '.$row->id.')" value="feeling">
                                             <label class="form-check-label"><b>Hiển thị ô chọn cảm xúc</b></label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox"'.$comment.' onchange="updateForm(this, '.$row->id.')" value="comment">
+                                            <label class="form-check-label"><b>Hiển thị ô nhập comment</b></label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox"'.$eyes.' onchange="updateForm(this, '.$row->id.')" value="eyes">
