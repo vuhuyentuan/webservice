@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\BankRequest;
 use App\Repositories\BankRepository;
+use Exception;
 use Yajra\DataTables\Facades\DataTables;
 
 class BanksController extends Controller
