@@ -92,8 +92,8 @@ Route::group(['middleware' => 'login'], function () {
     // order
     Route::get('/service/{slug}',[OrderController::class,'getService'])->name('order.get-service');
     Route::get('/service-pack/{id}',[OrderController::class,'getServicePack'])->name('order.get-service-pack');
-    Route::post('/service/{slug}/order',[OrderController::class,'order'])->name('order.order-service-pack');
-
+    Route::post('/service/{service_id}/order',[OrderController::class,'order'])->name('order.order-service-pack');
+    // contacts
     Route::get('/contacts',[UserController::class,'contacts'])->name('contacts');
 });
 

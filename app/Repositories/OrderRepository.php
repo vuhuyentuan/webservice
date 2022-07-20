@@ -2,7 +2,10 @@
 namespace App\Repositories;
 
 use App\Models\Service;
+use App\Models\ServiceBill;
 use App\Models\ServicePack;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class OrderRepository
 {
@@ -11,10 +14,47 @@ class OrderRepository
     }
 
     public function getServicePack($id){
-        return ServicePack::find($id);
+        $service_pack = ServicePack::find($id);
+        $type_html = '';
+        $quantity_html = '';
+        $vip_html = '';
+        if($service_pack->feeling == 'show'){
+            $type_html = view('users.orders.partials.feeling')->render();
+            $quantity_html = view('users.orders.partials.quantity')->render();
+        }else if($service_pack->comment == 'show'){
+            $type_html = view('users.orders.partials.comment')->render();
+        }else if ($service_pack->eyes == 'show'){
+            $type_html = view('users.orders.partials.eyes')->render();
+            $quantity_html = view('users.orders.partials.quantity')->render();
+        }
+        if($service_pack->vip == 'show'){
+            $vip_html = view('users.orders.partials.vip')->render();
+        }
+        return ['service_pack' => $service_pack,
+                'type_html' => $type_html,
+                'quantity_html' => $quantity_html,
+                'vip_html' => $vip_html
+            ];
     }
 
-    public function order(){
-
+    public function store($request, $service_id){
+        $bill = new ServiceBill();
+        $bill->service_id = $service_id;
+        $bill->service_pack_id = $request->service_pack;
+        $bill->user_id = Auth::user()->id;
+        $bill->order_code = Str::random(10);
+        $bill->url = $request->url;
+        $bill->quantity = $request->quantity;
+        $bill->feeling = $request->feeling;
+        $bill->eyes = $request->eyes;
+        $bill->vip_date = $request->vip_date;
+        if(!empty($request->comment)){
+            $comments = explode("\r\n", trim($request->comment));
+            $comments = array_filter($comments);
+            $comment_to_json = json_encode($comments);
+            $bill->comment = $comment_to_json;
+        }
+        $bill->note = $request->note;
+        $bill->save();
     }
 }
