@@ -7,7 +7,11 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServicePackController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BanksController;
+<<<<<<< Updated upstream
 use App\Http\Controllers\SettingController;
+=======
+use App\Http\Controllers\OrderController;
+>>>>>>> Stashed changes
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -85,6 +89,10 @@ Route::group(['middleware' => 'login'], function () {
     //Recharge
     Route::get('/recharge',[UserController::class,'recharge'])->name('recharge');
     Route::get('/recharge-history',[UserController::class,'getRechargeHistory'])->name('recharge.history');
+    // order
+    Route::get('/service/{slug}/order',[OrderController::class,'getService'])->name('order.get-service');
+    Route::get('/service-pack/{id}',[OrderController::class,'getServicePack'])->name('order.get-service-pack');
+    Route::post('/service/{slug}/order',[OrderController::class,'order'])->name('order.order-service-pack');
 });
 
 //transaction
