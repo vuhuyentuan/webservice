@@ -48,4 +48,11 @@ class SettingRepository
         $setting->logo_text = $request->logo_text;
         $setting->save();
     }
+
+    public function updateContact($request, $id)
+    {
+        $setting = Setting::find($id);
+        $setting->contacts = json_encode($request->all());
+        $setting->save();
+    }
 }

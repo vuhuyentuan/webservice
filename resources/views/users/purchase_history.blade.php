@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    <title>Lịch sử nạp tiền</title>
+    <title>Lịch sử đơn hàng</title>
 @endsection
 @section('content')
 <!-- Content Header (Page header) -->
@@ -8,12 +8,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Lịch sử nạp tiền</h1>
+          <h1 class="m-0">Lịch sử đơn hàng</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Lịch sử nạp tiền</li>
+            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+            <li class="breadcrumb-item active">Lịch sử đơn hàng</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -49,13 +49,14 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="recharge_history_table" class="table table-bordered table-hover ajax_view">
+                    <table id="purchase_history_table" class="table table-bordered table-hover ajax_view">
                     <thead>
                         <tr>
                             <th>Mã đơn hàng</th>
-                            <th>Khách hàng</th>
+                            <th>Dịch vụ</th>
+                            <th>Số lượng</th>
                             <th>Số tiền</th>
-                            <th>Nội dung</th>
+                            <th>URL/ID</th>
                             <th>Ngày</th>
                             <th>Trạng thái</th>
                         </tr>
@@ -68,7 +69,6 @@
             </div>
             <!-- /.col -->
         </div>
-        <div class="modal fade service_modal" id="service_modal" tabindex="-1" role="dialog"></div>
     </div><!-- /.container-fluid -->
 </section>
 <!-- /.content -->
@@ -83,17 +83,17 @@
         });
 
         $(document).on('change', '#date', function(){
-            recharge_history_table.ajax.reload();
+            purchase_history_table.ajax.reload();
         })
 
         var debounceTripDetail = null;
         $('#search-btn').on('input', function(){
             clearTimeout(debounceTripDetail);
             debounceTripDetail = setTimeout(() => {
-                recharge_history_table.search($(this).val()).draw();
+                purchase_history_table.search($(this).val()).draw();
             }, 500);
         });
-        var recharge_history_table =$('#recharge_history_table').DataTable({
+        var purchase_history_table =$('#purchase_history_table').DataTable({
             "destroy": true,
             "lengthChange": false,
             "searching": true,
@@ -126,7 +126,7 @@
                 },
             },
             ajax: {
-                url: "{{ route('recharges.history') }}",
+                url: "{{ route('user.order.history') }}",
                 data: function(d) {
                     var start = '';
                     var end = '';
@@ -144,10 +144,11 @@
             },
             order: [],
             "columns":[
-                {"data": "order_id", class: 'text-center'  },
-                {"data": "avatar" },
-                {"data": "amount", class: 'text-center' },
-                {"data": "description", class: 'text-center' },
+                {"data": "order_code", class: 'text-center'  },
+                {"data": "url"},
+                {"data": "quantity", class: 'text-center' },
+                {"data": "price", class: 'text-center' },
+                {"data": "url", orderable: false},
                 {"data": "created_at", class: 'text-center' },
                 {"data": "status", class: 'text-center', orderable: false },
             ]

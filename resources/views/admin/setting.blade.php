@@ -23,16 +23,18 @@
 
   <!-- Main content -->
   <section class="content">
+    @if(Session::has('flag'))
+        <div class="alert alert-{{Session::get('flag')}}">{{Session::get('messege')}} </div>
+    @endif
     <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
-
             <!-- Profile Image -->
             <div class="card card-primary card-outline">
+                <div class="card-header">
+                    <h4>Giao diện</h4>
+                </div> <!-- /.card-body -->
               <div class="card-body box-profile">
-                    @if(Session::has('flag'))
-                        <div class="alert alert-{{Session::get('flag')}}">{{Session::get('messege')}} </div>
-                    @endif
                     <form class="form-horizontal" action="{{ route('settings.update', $setting->id) }}" method="POST" enctype="multipart/form-data"  id="setting_form">
                       @csrf
                       @method('PUT')
@@ -70,7 +72,57 @@
           <!-- /.col -->
         </div>
         <!-- /.row -->
-      </div><!-- /.container-fluid -->
+    </div><!-- /.container-fluid -->
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- Profile Image -->
+            <div class="card card-primary card-outline">
+                <div class="card-header">
+                    <h4>Liên hệ</h4>
+                </div> <!-- /.card-body -->
+                <div class="card-body box-profile">
+                    <form class="form-horizontal" action="{{ route('settings.update_contact', $setting->id) }}" method="POST" enctype="multipart/form-data"  id="setting_form">
+                      @csrf
+                      <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Facebook</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" name="facebook" placeholder="https://www.facebook.com/admin" value="{{ json_decode($setting->contacts)->facebook }}">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Zalo</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" name="zalo" placeholder="https://zalo.me/011564897" value="{{ json_decode($setting->contacts)->zalo }}">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Số điện thoại</label>
+                        <div class="col-sm-10">
+                          <input type="number" class="form-control" name="phone" placeholder="Số điện thoại" value="{{ json_decode($setting->contacts)->phone }}">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                          <input type="email" class="form-control" name="email" placeholder="Email" value="{{ json_decode($setting->contacts)->email }}">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <div class="offset-sm-2 col-sm-10">
+                          <button type="submit" class="btn btn-danger">Cập nhật</button>
+                        </div>
+                      </div>
+                    </form>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
   </section>
   <!-- /.content -->
 @endsection

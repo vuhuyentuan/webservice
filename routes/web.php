@@ -74,6 +74,7 @@ Route::group(['middleware' => 'user'], function () {
     // banks
     Route::resource('banks', BanksController::class);
     // setting
+    Route::post('/settings/update-contact/{id}',[SettingController::class,'updateContact'])->name('settings.update_contact');
     Route::resource('settings', SettingController::class);
 });
 
@@ -86,10 +87,14 @@ Route::group(['middleware' => 'login'], function () {
     //Recharge
     Route::get('/recharge',[UserController::class,'recharge'])->name('recharge');
     Route::get('/recharge-history',[UserController::class,'getRechargeHistory'])->name('recharge.history');
+    //order history
+    Route::get('/user-order-history',[UserController::class,'history'])->name('user.order.history');
     // order
     Route::get('/service/{slug}',[OrderController::class,'getService'])->name('order.get-service');
     Route::get('/service-pack/{id}',[OrderController::class,'getServicePack'])->name('order.get-service-pack');
     Route::post('/service/{slug}/order',[OrderController::class,'order'])->name('order.order-service-pack');
+
+    Route::get('/contacts',[UserController::class,'contacts'])->name('contacts');
 });
 
 //transaction

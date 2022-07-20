@@ -158,7 +158,6 @@ class AdminController extends Controller
 
     public function history(Request $request)
     {
-        $service_bills = $this->repository->serviceBills()->get();
         $date =  date('Y-m-d');
         $first_day = date('Y-m-01', strtotime($date));
         $last_day = date('Y-m-t', strtotime($date));
@@ -213,6 +212,6 @@ class AdminController extends Controller
                 ->rawColumns(['avatar','status', 'created_at', 'service'])
                 ->make(true);;
         }
-        return view('admin.purchase_history', compact('service_bills', 'first_day', 'last_day'));
+        return view('admin.purchase_history', compact('first_day', 'last_day'));
     }
 }

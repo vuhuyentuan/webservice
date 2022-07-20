@@ -12,7 +12,7 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
             <li class="breadcrumb-item active">Lịch sử nạp tiền</li>
           </ol>
         </div><!-- /.col -->
@@ -53,7 +53,6 @@
                     <thead>
                         <tr>
                             <th>Mã đơn hàng</th>
-                            <th>Khách hàng</th>
                             <th>Số tiền</th>
                             <th>Nội dung</th>
                             <th>Ngày</th>
@@ -68,7 +67,6 @@
             </div>
             <!-- /.col -->
         </div>
-        <div class="modal fade service_modal" id="service_modal" tabindex="-1" role="dialog"></div>
     </div><!-- /.container-fluid -->
 </section>
 <!-- /.content -->
@@ -126,7 +124,7 @@
                 },
             },
             ajax: {
-                url: "{{ route('recharges.history') }}",
+                url: "{{ route('recharge.history') }}",
                 data: function(d) {
                     var start = '';
                     var end = '';
@@ -145,7 +143,6 @@
             order: [],
             "columns":[
                 {"data": "order_id", class: 'text-center'  },
-                {"data": "avatar" },
                 {"data": "amount", class: 'text-center' },
                 {"data": "description", class: 'text-center' },
                 {"data": "created_at", class: 'text-center' },

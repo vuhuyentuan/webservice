@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    <title>Dashboard</title>
+    <title>Trang chủ</title>
 @endsection
 @section('content')
 <div class="content-header">

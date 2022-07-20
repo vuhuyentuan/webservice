@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use App\Models\Bank;
 use App\Models\Category;
+use App\Models\ServiceBill;
+use App\Models\Setting;
 use App\Models\User;
 use App\Models\UserTransaction;
 use Carbon\Carbon;
@@ -105,10 +107,33 @@ class UserRepository
         return $recharge_histories;
     }
 
+    public function serviceBills()
+    {
+        return ServiceBill::where('user_id', Auth::user()->id)
+                            ->join('users', 'service_bills.user_id', '=', 'users.id')
+                            ->join('services as sv', 'service_bills.service_id', '=', 'sv.id')
+                            ->join('service_packs as svp', 'svp.id', '=', 'service_bills.service_pack_id')
+                            ->select([
+                                'service_bills.*',
+                                'sv.name as service_name',
+                                'svp.name as svp_name',
+                                'svp.price as price',
+                                'users.email as email',
+                                'users.name as user_name',
+                                'users.avatar as avatar'
+                            ])
+                            ->orderBy('id', 'desc');
+    }
+
     public function userDashboard()
     {
         return Category::select('id', 'name', 'image', 'status')
                         ->with('service','service.service_pack')
                         ->get();
+    }
+
+    public function getSetting()
+    {
+        return Setting::find(1);
     }
 }

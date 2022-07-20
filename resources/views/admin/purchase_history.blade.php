@@ -2,13 +2,6 @@
 @section('title')
     <title>Đơn hàng</title>
 @endsection
-@section('style')
-<style>
-.select2-container .select2-selection--single{
-    height: 38px;
-}
-</style>
-@endsection
 @section('content')
 <!-- Content Header (Page header) -->
 <div class="content-header">

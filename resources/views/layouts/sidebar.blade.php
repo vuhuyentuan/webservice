@@ -117,6 +117,18 @@
                 <p>Nạp tiền</p>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('recharge.history') }}" class="nav-link {{ URL::current() == route('recharge.history') ? 'active' : '' }}">
+                <img src="{{ asset('AdminLTE-3.1.0/dist/icon/business-man.svg') }}" width="30px" height="30px" class="img-circle elevation-2">&nbsp;
+                <p>Lịch sử nạp tiền</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('user.order.history') }}" class="nav-link {{ URL::current() == route('user.order.history') ? 'active' : '' }}">
+                <img src="{{ asset('AdminLTE-3.1.0/dist/icon/list-order.svg') }}" width="30px" height="30px" class="img-circle elevation-2">&nbsp;
+                <p>Lịch sử đơn hàng</p>
+            </a>
+        </li>
         <li class="nav-header">DỊCH VỤ</li>
         @foreach ($category as $cate)
             @if($cate->status == 'show')
@@ -153,7 +165,7 @@
         @endforeach
         <li class="nav-header">KHÁC</li>
         <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('contacts') }}" class="nav-link">
                 <img src="{{ asset('AdminLTE-3.1.0/dist/icon/icon-contact.png') }}" width="30px" height="30px" class="img-circle elevation-2">&nbsp;
                 <p>Liên hệ</p>
             </a>

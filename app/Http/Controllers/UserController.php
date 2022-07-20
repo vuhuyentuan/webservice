@@ -98,6 +98,37 @@ class UserController extends Controller
         ]);
     }
 
+    public function getRechargeHistory(Request $request)
+    {
+        $date =  date('Y-m-d');
+        $first_day = date('Y-m-01', strtotime($date));
+        $last_day = date('Y-m-t', strtotime($date));
+        if (request()->ajax()) {
+            $recharge_histories = $this->repository->getRechargeHistory();
+            if (!empty($request->start_date) && !empty($request->end_date)) {
+                $start = $request->start_date;
+                $end =  $request->end_date;
+                $recharge_histories->whereDate('user_transactions.created_at', '>=', $start)
+                                ->whereDate('user_transactions.created_at', '<=', $end);
+            }
+            return DataTables::of($recharge_histories)
+                ->editColumn('status', function($row){
+                    if ($row->status == 1) {
+                        $html = '<span class="badge badge-success">'. __("paid") .'</span>';
+                    }else{
+                        $html = '<span class="badge badge-danger">'. __("unpaid") .'</span>';
+                    }
+
+                    return $html;
+                })
+                ->editColumn('amount', '+ {{@number_format($amount)}} đ')
+                ->editColumn('created_at', '{{date("d/m/Y H:i", strtotime($created_at))}}')
+                ->rawColumns(['status'])
+                ->make(true);;
+        }
+        return view('users.recharge_history', compact('first_day', 'last_day'));
+    }
+
     public function userDashboard()
     {
         $category = $this->repository->userDashboard();
@@ -132,6 +163,47 @@ class UserController extends Controller
         } catch (Exception $e) {
             return redirect()->back()->with(['flag'=>'danger','messege'=>'Đã xảy ra lỗi!']);
         }
+    }
+
+    public function history(Request $request)
+    {
+        $date =  date('Y-m-d');
+        $first_day = date('Y-m-01', strtotime($date));
+        $last_day = date('Y-m-t', strtotime($date));
+        if (request()->ajax()) {
+            $service_bills = $this->repository->serviceBills();
+            if (!empty($request->start_date) && !empty($request->end_date)) {
+                $start = $request->start_date;
+                $end =  $request->end_date;
+                $service_bills->whereDate('service_bills.created_at', '>=', $start)
+                            ->whereDate('service_bills.created_at', '<=', $end);
+            }
+            return DataTables::of($service_bills)
+                ->addColumn('service', '{{$service_name}} - {{$svp_name}}')
+                ->editColumn('status', function($row){
+                    $html = '<span class="badge badge-warning">Đang xử lý</span>';
+                    if ($row->status == 'running') {
+                        $html = '<span class="badge badge-info">Đang chạy</span>';
+                    }elseif($row->status == 'completed'){
+                        $html = '<span class="badge badge-success">Hoàn thành</span>';
+                    }elseif($row->status == 'cancel'){
+                        $html = '<span class="badge badge-danger">Đã hủy</span>';
+                    }
+
+                    return $html;
+                })
+                ->editColumn('price', '{{@number_format($price)}} đ')
+                ->editColumn('created_at', '{{date("d/m/Y H:i", strtotime($created_at))}}')
+                ->rawColumns(['avatar','status', 'created_at', 'service'])
+                ->make(true);;
+        }
+        return view('users.purchase_history', compact('first_day', 'last_day'));
+    }
+
+    public function contacts()
+    {
+        $contact = $this->repository->getSetting();
+        return view('users.contact', compact('contact'));
     }
 
     public static function utf8convert($str) {

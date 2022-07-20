@@ -35,4 +35,14 @@ class SettingController extends Controller
             return redirect()->back()->with(['flag'=>'danger','messege'=>'Đã xảy ra lỗi!']);
         }
     }
+
+    public function updateContact(Request $request, $id)
+    {
+        try {
+            $this->repository->updateContact($request, $id);
+            return redirect()->back()->with(['flag'=>'success','messege'=>'Cập nhật thành công']);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with(['flag'=>'danger','messege'=>'Đã xảy ra lỗi!']);
+        }
+    }
 }
