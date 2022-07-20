@@ -148,7 +148,7 @@
             "columns":[
                 {"data": "avatar" },
                 {"data": "order_code", class: 'text-center'  },
-                {"data": "url"},
+                {"data": "service"},
                 {"data": "quantity", class: 'text-center' },
                 {"data": "price", class: 'text-center' },
                 {"data": "url", orderable: false},
