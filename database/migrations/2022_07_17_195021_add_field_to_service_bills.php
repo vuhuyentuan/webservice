@@ -15,7 +15,7 @@ class AddFieldToServiceBills extends Migration
     {
         Schema::table('service_bills', function (Blueprint $table) {
             $table->string('feeling')->nullable()->after('amount');
-            $table->string('comment')->nullable();
+            $table->text('comment')->nullable();
         });
     }
 
