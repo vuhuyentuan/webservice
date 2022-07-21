@@ -55,7 +55,7 @@ class OrderController extends Controller
             if($quantity < $service_pack->min){
                 return response()->json([
                     'success' => false,
-                    'msg' => 'Số lượng tối thiểu của gói dịch vụ là '. $request->total_lines
+                    'msg' => 'Số lượng tối thiểu của gói dịch vụ là '. $request->min
                 ]);
             }
             $this->repository->store($request, $service_id);
