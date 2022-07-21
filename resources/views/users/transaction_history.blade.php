@@ -145,7 +145,7 @@
                 {"data": "status", class: 'text-center', orderable: false  },
                 {"data": "price", class: 'text-center' },
                 {"data": "volatility", class: 'text-center' },
-                {"data": "description" },
+                {"data": "content" },
                 {"data": "created_at", class: 'text-center', orderable: false },
             ]
         });
