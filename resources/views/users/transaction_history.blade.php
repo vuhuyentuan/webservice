@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    <title>Đơn hàng</title>
+    <title>Biến động số dư</title>
 @endsection
 @section('content')
 <!-- Content Header (Page header) -->
@@ -8,12 +8,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Đơn hàng</h1>
+          <h1 class="m-0">Biến động số dư</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Đơn hàng</li>
+            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+            <li class="breadcrumb-item active">Biến động số dư</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -49,17 +49,14 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="purchase_history_table" class="table table-bordered table-hover ajax_view">
+                    <table id="transaction_history_table" class="table table-bordered table-hover ajax_view">
                     <thead>
                         <tr>
-                            <th>Khách hàng</th>
-                            <th>Mã đơn hàng</th>
-                            <th>Dịch vụ</th>
-                            <th>Số lượng</th>
-                            <th>Số tiền</th>
-                            <th>URL/ID</th>
-                            <th>Ngày</th>
                             <th>Trạng thái</th>
+                            <th>Số tiền</th>
+                            <th>Biến động</th>
+                            <th>Nội dung</th>
+                            <th>Ngày</th>
                         </tr>
                     </thead>
                     </table>
@@ -70,7 +67,6 @@
             </div>
             <!-- /.col -->
         </div>
-        <div class="modal fade service_modal" id="service_modal" tabindex="-1" role="dialog"></div>
     </div><!-- /.container-fluid -->
 </section>
 <!-- /.content -->
@@ -85,17 +81,17 @@
         });
 
         $(document).on('change', '#date', function(){
-            purchase_history_table.ajax.reload();
+            transaction_history_table.ajax.reload();
         })
 
         var debounceTripDetail = null;
         $('#search-btn').on('input', function(){
             clearTimeout(debounceTripDetail);
             debounceTripDetail = setTimeout(() => {
-                purchase_history_table.search($(this).val()).draw();
+                transaction_history_table.search($(this).val()).draw();
             }, 500);
         });
-        var purchase_history_table =$('#purchase_history_table').DataTable({
+        var transaction_history_table =$('#transaction_history_table').DataTable({
             "destroy": true,
             "lengthChange": false,
             "searching": true,
@@ -146,14 +142,11 @@
             },
             order: [],
             "columns":[
-                {"data": "avatar" },
-                {"data": "order_code", class: 'text-center'  },
-                {"data": "service"},
-                {"data": "quantity", class: 'text-center' },
+                {"data": "status", class: 'text-center', orderable: false  },
                 {"data": "price", class: 'text-center' },
-                {"data": "url", orderable: false},
-                {"data": "created_at", class: 'text-center' },
-                {"data": "status", class: 'text-center', orderable: false },
+                {"data": "volatility", class: 'text-center' },
+                {"data": "description" },
+                {"data": "created_at", class: 'text-center', orderable: false },
             ]
         });
     });

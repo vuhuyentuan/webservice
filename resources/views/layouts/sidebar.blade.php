@@ -129,6 +129,12 @@
                 <p>Lịch sử đơn hàng</p>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('transaction.history') }}" class="nav-link {{ URL::current() == route('transaction.history') ? 'active' : '' }}">
+                <img src="{{ asset('AdminLTE-3.1.0/dist/icon/icon-transaction.png') }}" width="30px" height="30px" class="img-circle elevation-2">&nbsp;
+                <p>Biến động số dư</p>
+            </a>
+        </li>
         <li class="nav-header">DỊCH VỤ</li>
         @foreach ($category as $cate)
             @if($cate->status == 'show')

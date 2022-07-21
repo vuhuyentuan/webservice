@@ -104,14 +104,14 @@ class UserController extends Controller
         $first_day = date('Y-m-01', strtotime($date));
         $last_day = date('Y-m-t', strtotime($date));
         if (request()->ajax()) {
-            $recharge_histories = $this->repository->getRechargeHistory();
+            $transaction_history = $this->repository->getRechargeHistory();
             if (!empty($request->start_date) && !empty($request->end_date)) {
                 $start = $request->start_date;
                 $end =  $request->end_date;
-                $recharge_histories->whereDate('user_transactions.created_at', '>=', $start)
+                $transaction_history->whereDate('user_transactions.created_at', '>=', $start)
                                 ->whereDate('user_transactions.created_at', '<=', $end);
             }
-            return DataTables::of($recharge_histories)
+            return DataTables::of($transaction_history)
                 ->editColumn('status', function($row){
                     if ($row->status == 1) {
                         $html = '<span class="badge badge-success">'. __("paid") .'</span>';
@@ -204,6 +204,45 @@ class UserController extends Controller
     {
         $contact = $this->repository->getSetting();
         return view('users.contact', compact('contact'));
+    }
+
+    public function getTransactionHistory(Request $request)
+    {
+        $date =  date('Y-m-d');
+        $first_day = date('Y-m-01', strtotime($date));
+        $last_day = date('Y-m-t', strtotime($date));
+        if (request()->ajax()) {
+            $transaction_history = $this->repository->getTransactionHistory();
+            if (!empty($request->start_date) && !empty($request->end_date)) {
+                $start = $request->start_date;
+                $end =  $request->end_date;
+                $transaction_history->whereDate('history_transactions.created_at', '>=', $start)
+                                ->whereDate('history_transactions.created_at', '<=', $end);
+            }
+            return DataTables::of($transaction_history)
+                ->editColumn('status', function($row){
+                    if ($row->status == 'payment') {
+                        $html = '<span class="badge badge-success">Thanh toán</span>';
+                    }elseif ($row->status == 'return'){
+                        $html = '<span class="badge badge-danger">Hoàn tiền</span>';
+                    }
+
+                    return $html;
+                })
+                ->editColumn('price', function($row){
+                    if ($row->status == 'payment') {
+                        $html = '-'.$row->price;
+                    }elseif ($row->status == 'return'){
+                        $html = '+'.$row->price;
+                    }
+
+                    return $html;
+                })
+                ->editColumn('created_at', '{{date("d/m/Y H:i", strtotime($created_at))}}')
+                ->rawColumns(['status', 'created_at'])
+                ->make(true);;
+        }
+        return view('users.transaction_history', compact('first_day', 'last_day'));
     }
 
     public static function utf8convert($str) {

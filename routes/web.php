@@ -84,7 +84,7 @@ Route::group(['middleware' => 'login'], function () {
     Route::get('/info',[UserController::class,'info'])->name('info');
     Route::post('/info-update/{id}',[UserController::class,'updateInfo'])->name('info.update');
     Route::get('/amount',[UserController::class,'getAmount'])->name('amount');
-    //Recharge
+    //recharge
     Route::get('/recharge',[UserController::class,'recharge'])->name('recharge');
     Route::get('/recharge-history',[UserController::class,'getRechargeHistory'])->name('recharge.history');
     //order history
@@ -95,6 +95,8 @@ Route::group(['middleware' => 'login'], function () {
     Route::post('/service/{service_id}/order',[OrderController::class,'order'])->name('order.order-service-pack');
     // contacts
     Route::get('/contacts',[UserController::class,'contacts'])->name('contacts');
+     //transaction history
+     Route::get('/transaction-history',[UserController::class,'getTransactionHistory'])->name('transaction.history');
 });
 
 //transaction
