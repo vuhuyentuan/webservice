@@ -73,7 +73,7 @@ class OrderRepository
         $history = new HistoryTransaction();
         $history->user_id = $user->id;
         $history->price = $bill->amount;
-        $history->content = $request->service_pack_name;
+        $history->content = $bill->service->name . ' - ' . $request->service_pack_name;
         $history->volatility = number_format($amount_old) . ' -> ' . number_format($user->amount);
         $history->save();
     }
