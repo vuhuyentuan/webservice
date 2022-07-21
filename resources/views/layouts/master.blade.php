@@ -120,6 +120,9 @@
 <script src="{{ asset('AdminLTE-3.1.0/dist/js/adminlte.js') }}"></script>
 @yield('script')
 <script>
+    $(document).ready(function(){
+        $('.nav-link.active').parent().parent().parent().addClass('menu-open');
+    });
     $("div.alert").delay(3000).slideUp();
     window.setInterval(function() {
         $.ajax({

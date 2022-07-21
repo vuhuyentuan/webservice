@@ -154,7 +154,7 @@
                     @foreach ($cate->service as $service)
                     @if($service->status == 'show')
                     <li class="nav-item">
-                        <a href="{{route('order.get-service', $service->slug)}}" class="nav-link">
+                        <a href="{{route('order.get-service', $service->slug)}}" class="nav-link {{ URL::current() == route('order.get-service', $service->slug) ? 'active' : '' }}">
                             @if($service->image)
                                 <img src="{{ asset($service->image) }}" width="28px" height="28px" class="img-circle elevation-2">&nbsp;
                             @else
