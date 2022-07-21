@@ -26,7 +26,7 @@ class CreateSettingsTable extends Migration
             [
                 'id' => '1',
                 'logo' => 'AdminLTE-3.1.0/dist/img/AdminLTELogo.png',
-                'logo_text' => 'AdminLTE 3',
+                'logo_text' => 'DVMXH',
                 'banner' => 'AdminLTE-3.1.0/dist/img/bg7.jpg',
             ],
         ]);

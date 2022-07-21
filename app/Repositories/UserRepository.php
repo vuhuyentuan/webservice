@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Bank;
 use App\Models\Category;
+use App\Models\HistoryTransaction;
 use App\Models\ServiceBill;
 use App\Models\Setting;
 use App\Models\User;
@@ -123,6 +124,17 @@ class UserRepository
                                 'users.avatar as avatar'
                             ])
                             ->orderBy('id', 'desc');
+    }
+
+    public function getTransactionHistory()
+    {
+        $history_transactions = HistoryTransaction::where('user_id', Auth::user()->id)
+                        ->join('users as u', 'history_transactions.user_id', '=', 'u.id')
+                        ->select([
+                            'history_transactions.*'
+                        ])
+                        ->orderBy('id', 'desc');
+        return $history_transactions;
     }
 
     public function userDashboard()
