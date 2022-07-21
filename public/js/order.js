@@ -37,9 +37,8 @@ let total_lines = 0;
 function total(){
     let total = 0;
     let service_pack = $('#order_form').find("input[name=service_pack]:checked").attr('data-price');
-    if($('#feeling').length > 0){
-        total = service_pack
-    }else if($('#comment').length > 0){
+    total = service_pack
+    if($('#comment').length > 0){
         let lineCount = 0;
         var lines = $('#comment').val().split("\n");
         for (var i = 0; i < lines.length; i++) {
