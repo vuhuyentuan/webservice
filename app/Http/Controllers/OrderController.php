@@ -23,7 +23,8 @@ class OrderController extends Controller
     }
 
     public function getServicePack($id){
-        return $this->repository->getServicePack($id);
+        $service_pack = $this->repository->getServicePack($id);
+        return $this->repository->getServicePackData($service_pack);
     }
 
     public function order(Request $request, $service_id){
@@ -38,6 +39,17 @@ class OrderController extends Controller
                 return response()->json([
                     'success' => false,
                     'msg' => 'Số dư của bạn không đủ để đặt đơn hàng này!'
+                ]);
+            }
+            $service_pack = $this->repository->getServicePack($request->service_pack);
+            $quantity = $request->quantity;
+            if(!empty($request->comment)){
+                $quantity = $request->total_lines;
+            }
+            if($quantity < $service_pack->min){
+                return response()->json([
+                    'success' => false,
+                    'msg' => 'Số lượng tối thiểu của gói dịch vụ là '. $request->total_lines
                 ]);
             }
             $this->repository->store($request, $service_id);

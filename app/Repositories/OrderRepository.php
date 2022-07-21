@@ -14,7 +14,9 @@ class OrderRepository
     }
 
     public function getServicePack($id){
-        $service_pack = ServicePack::find($id);
+        return ServicePack::find($id);
+    }
+    public function getServicePackData($service_pack){
         $type_html = '';
         $quantity_html = '';
         $vip_html = '';
