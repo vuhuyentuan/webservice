@@ -70,10 +70,12 @@ function total(){
 
 $('form#order_form').submit(function(e) {
     e.preventDefault();
+    let service_pack_name = $('#order_form').find("input[name=service_pack]:checked").attr('data-name');
     $('#order_submit').attr('disabled', true);
     let data = new FormData($('#order_form')[0]);
     data.append('amount', total_amount);
     data.append('total_lines', total_lines);
+    data.append('service_pack_name', service_pack_name);
     $.ajax({
         method: 'POST',
         url: $(this).attr('action'),

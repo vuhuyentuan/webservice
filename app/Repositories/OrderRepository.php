@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories;
 
+use App\Models\HistoryTransaction;
 use App\Models\Service;
 use App\Models\ServiceBill;
 use App\Models\ServicePack;
@@ -62,9 +63,18 @@ class OrderRepository
         }
         $bill->amount = $request->amount;
         $bill->save();
-
+        // user
         $user = User::find(Auth()->user()->id);
+        $amount_old = $user->amount;
         $user->amount = $user->amount - $bill->amount;
         $user->save();
+        //history
+
+        $history = new HistoryTransaction();
+        $history->user_id = $user->id;
+        $history->price = $bill->amount;
+        $history->content = $request->service_pack_name;
+        $history->volatility = number_format($amount_old) . ' -> ' . number_format($user->amount);
+        $history->save();
     }
 }
