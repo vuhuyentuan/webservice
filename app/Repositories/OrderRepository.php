@@ -4,6 +4,7 @@ namespace App\Repositories;
 use App\Models\Service;
 use App\Models\ServiceBill;
 use App\Models\ServicePack;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -61,5 +62,9 @@ class OrderRepository
         }
         $bill->amount = $request->amount;
         $bill->save();
+
+        $user = User::find(Auth()->user()->id);
+        $user->amount = $user->amount - $bill->amount;
+        $user->save();
     }
 }

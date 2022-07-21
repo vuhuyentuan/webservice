@@ -35,6 +35,12 @@ class OrderController extends Controller
                     'msg' => 'Vui lòng nhập ID hoặc link!'
                 ]);
             }
+            if(empty($request->service_pack)){
+                return response()->json([
+                    'success' => false,
+                    'msg' => 'Vui lòng chọn gói dịch vụ!'
+                ]);
+            }
             if(Auth::user()->amount < $request->amount){
                 return response()->json([
                     'success' => false,
