@@ -44,17 +44,20 @@ class OrderRepository
         $bill->user_id = Auth::user()->id;
         $bill->order_code = Str::random(10);
         $bill->url = $request->url;
-        $bill->quantity = $request->quantity;
         $bill->feeling = $request->feeling;
         $bill->eyes = $request->eyes;
         $bill->vip_date = $request->vip_date;
+        $bill->note = $request->note;
         if(!empty($request->comment)){
             $comments = explode("\r\n", trim($request->comment));
             $comments = array_filter($comments);
             $comment_to_json = json_encode($comments);
             $bill->comment = $comment_to_json;
+            $bill->quantity = $request->total_lines;
+        }else{
+            $bill->quantity = $request->quantity;
         }
-        $bill->note = $request->note;
+        $bill->amount = $request->amount;
         $bill->save();
     }
 }

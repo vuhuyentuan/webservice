@@ -34,7 +34,7 @@
                     <form action="{{ route('order.order-service-pack', $service->id) }}" method="POST" enctype="multipart/form-data" id="order_form">
                         @csrf
                         <div class="form-group row">
-                            <label class="form-control-label col-lg-3" for="basic-url">ID bài viết</label>
+                            <label class="form-control-label col-lg-3" for="basic-url">Nhập ID hoặc Link</label>
                             <input type="text" class="form-control col-lg-9" name="url" id="url" placeholder="Nhập ID hoặc Link tùy theo gói">
                         </div>
                         <div class="form-group row">
@@ -46,7 +46,7 @@
                             @foreach ($service->service_pack as $service_pack)
                             <div class="custom-control custom-radio">
                                 <input class="custom-control-input" type="radio" id="customRadio{{$service_pack->id}}" name="service_pack" data-price="{{$service_pack->price}}" value="{{$service_pack->id}}">
-                                <label for="customRadio{{$service_pack->id}}" class="custom-control-label">{{$service_pack->name}}</label>
+                                <label for="customRadio{{$service_pack->id}}" class="custom-control-label">{{$service_pack->name}}&nbsp;&nbsp;<small class="badge badge-success"> {{number_format($service_pack->price)}}đ</small></label>
                             </div>
                             @endforeach
                             @endif

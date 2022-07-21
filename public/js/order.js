@@ -31,6 +31,8 @@ $(document).on('change', '#vip', function () {
     total();
 });
 
+let total_amount = 0;
+let total_lines = 0;
 function total(){
     let total = 0;
     let service_pack = $('#order_form').find("input[name=service_pack]:checked").attr('data-price');
@@ -42,7 +44,8 @@ function total(){
         for (var i = 0; i < lines.length; i++) {
             if (lines[i].length > 0) lineCount++;
         }
-        total = service_pack * lineCount
+        total_lines = lineCount;
+        total = service_pack * lineCount;
     }else if($('#eyes').length > 0){
         let eyes = $('#eyes').val();
         if(eyes == ''){
@@ -55,12 +58,13 @@ function total(){
         if(quantity == ''){
             quantity = 0;
         }
-        total = total * quantity
+        total = total * quantity;
     }
     if($('#vip').length > 0){
         let day_number = $('#vip').val();
-        total = total * day_number
+        total = total * day_number;
     }
+    total_amount = total
     $('#total').html(`${total.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}đ`);
 }
 
@@ -68,6 +72,8 @@ $('form#order_form').submit(function(e) {
     e.preventDefault();
     $('#order_submit').attr('disabled', true);
     let data = new FormData($('#order_form')[0]);
+    data.append('amount', total_amount);
+    data.append('total_lines', total_lines);
     $.ajax({
         method: 'POST',
         url: $(this).attr('action'),
@@ -77,23 +83,20 @@ $('form#order_form').submit(function(e) {
         processData: false,
         success: function(result) {
             if (result.success == true) {
-                $('.submit_add').attr('disabled', false);
+                $('#order_submit').attr('disabled', false);
+                toastr.options = {
+                    "progressBar": true,
+                    "timeOut": "2000",
+                    }
                 toastr.success(result.msg);
+                setTimeout(redirect, 2000);
             } else {
                 toastr.error(result.msg);
-                $('.submit_add').attr('disabled', false);
+                $('#order_submit').attr('disabled', false);
             }
         },
-        error: function(err) {
-            if (err.status == 422) {
-                $('#account-number-error').html('');
-                $.each(err.responseJSON.errors, function(i, error) {
-                    if(i == 'account_number'){
-                        $(document).find('[name="' + i + '"]').after($('<label id="account-number-error" class="error">' + error + '</label>'));
-                    }
-                });
-            }
-            $('#order_submit').attr('disabled', false);
-        }
     });
 });
+function redirect(){
+    window.location="/user-order-history";
+}
