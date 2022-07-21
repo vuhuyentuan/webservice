@@ -121,7 +121,8 @@
 @yield('script')
 <script>
     $(document).ready(function(){
-        $('.nav-link.active').parent().parent().parent().addClass('menu-open');
+        $('.nav-link.active').parent().parent().parent().addClass('menu-is-opening menu-open');
+        $('.nav-link.active').parent().parent().parent().children('.nav-link').addClass('active');
     });
     $("div.alert").delay(3000).slideUp();
     window.setInterval(function() {

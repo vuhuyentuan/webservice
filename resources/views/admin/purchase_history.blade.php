@@ -70,7 +70,7 @@
             </div>
             <!-- /.col -->
         </div>
-        <div class="modal fade service_modal" id="service_modal" tabindex="-1" role="dialog"></div>
+        <div class="modal fade status_modal" id="status_modal" tabindex="-1" role="dialog"></div>
     </div><!-- /.container-fluid -->
 </section>
 <!-- /.content -->
@@ -78,6 +78,12 @@
 @section('script')
 <script>
     $(document).ready(function (e) {
+        $(document).on('click', '.edit_status', function(e) {
+            e.preventDefault();
+            $('div.status_modal').load($(this).attr('data-href'), function() {
+                $(this).modal('show');
+            });
+        });
         $('input[name="date"]').daterangepicker({
             locale: {
                 format: 'DD/MM/YYYY'
@@ -128,7 +134,7 @@
                 },
             },
             ajax: {
-                url: "{{ route('transaction.history') }}",
+                url: "{{ route('order.history') }}",
                 data: function(d) {
                     var start = '';
                     var end = '';
@@ -150,7 +156,7 @@
                 {"data": "order_code", class: 'text-center'  },
                 {"data": "service"},
                 {"data": "quantity", class: 'text-center' },
-                {"data": "price", class: 'text-center' },
+                {"data": "amount", class: 'text-center' },
                 {"data": "url", orderable: false},
                 {"data": "created_at", class: 'text-center' },
                 {"data": "status", class: 'text-center', orderable: false },

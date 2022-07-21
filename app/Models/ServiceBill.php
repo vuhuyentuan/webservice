@@ -17,6 +17,11 @@ class ServiceBill extends Model
 
     public function service()
     {
-        return $this->belongsTo(Services::class,'service_id', 'id');
+        return $this->belongsTo(Service::class,'service_id', 'id');
+    }
+
+    public function service_pack()
+    {
+        return $this->belongsTo(ServicePack::class,'service_pack_id', 'id');
     }
 }

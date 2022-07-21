@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\UserTransaction;
 use App\Repositories\AdminRepository;
 use Carbon\CarbonPeriod;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
@@ -174,7 +175,7 @@ class AdminController extends Controller
                 ->editColumn('avatar', function($row){
                     $html = '<div class="d-flex px-2 py-1">
                             <div>
-                                <img src="'.asset('assets/images/no_img.jpg').'" width="38px" height="38px" class="rounded-circle avatar">
+                                <img src="https://ui-avatars.com/api/?name='. $row->user_name .'" width="38px" height="38px" class="rounded-circle avatar">
                             </div>&nbsp;&nbsp;
                             <div class="d-flex flex-column justify-content-center">
                                 <h6 class="mb-0 text-sm">'.$row->user_name.'</h6>
@@ -196,9 +197,9 @@ class AdminController extends Controller
                     return $html;
                 })
                 ->editColumn('status', function($row){
-                    $html = '<span class="badge badge-warning">Đang xử lý</span>';
+                    $html = '<a href="javascript:void(0)" data-href="'.route('view.status', $row->id).'" class="edit_status"><span class="badge badge-warning">Đang xử lý</span></a>';
                     if ($row->status == 'running') {
-                        $html = '<span class="badge badge-info">Đang chạy</span>';
+                        $html = '<a href="javascript:void(0)" data-href="'.route('view.status', $row->id).'" class="edit_status"><span class="badge badge-info">Đang chạy</span></a>';
                     }elseif($row->status == 'completed'){
                         $html = '<span class="badge badge-success">Hoàn thành</span>';
                     }elseif($row->status == 'cancel'){
@@ -207,11 +208,33 @@ class AdminController extends Controller
 
                     return $html;
                 })
-                ->editColumn('price', '{{@number_format($price)}} đ')
+                ->editColumn('amount', '{{@number_format($amount)}} đ')
                 ->editColumn('created_at', '{{date("d/m/Y H:i", strtotime($created_at))}}')
                 ->rawColumns(['avatar','status', 'created_at', 'service'])
                 ->make(true);;
         }
         return view('admin.purchase_history', compact('first_day', 'last_day'));
+    }
+
+    public function viewStatus($id)
+    {
+        $status = $this->repository->getServiceBill($id);
+        return view('admin.orders.edit', compact('status'));
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        try {
+            $this->repository->updateStatus($request, $id);
+            return response()->json([
+                'success' => true,
+                'msg' => 'Cập nhật trạng thái thành công'
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'msg' => 'Đã xảy ra lỗi!'
+            ]);
+        }
     }
 }

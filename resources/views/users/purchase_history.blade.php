@@ -145,9 +145,9 @@
             order: [],
             "columns":[
                 {"data": "order_code", class: 'text-center'  },
-                {"data": "url"},
+                {"data": "service"},
                 {"data": "quantity", class: 'text-center' },
-                {"data": "price", class: 'text-center' },
+                {"data": "amount", class: 'text-center' },
                 {"data": "url", orderable: false},
                 {"data": "created_at", class: 'text-center' },
                 {"data": "status", class: 'text-center', orderable: false },

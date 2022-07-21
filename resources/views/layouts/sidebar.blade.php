@@ -37,7 +37,7 @@
         @php
             $menu = '';
             $active = '';
-            if (URL::current() == route('categories.index') || URL::current() == route('services.index')) {
+            if (URL::current() == route('categories.index') || URL::current() == route('services.index') || URL::current() == route('order.history')) {
                 $menu = 'menu-is-opening menu-open';
                 $active = 'active';
             }

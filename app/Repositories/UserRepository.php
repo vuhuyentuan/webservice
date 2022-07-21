@@ -118,7 +118,6 @@ class UserRepository
                                 'service_bills.*',
                                 'sv.name as service_name',
                                 'svp.name as svp_name',
-                                'svp.price as price',
                                 'users.email as email',
                                 'users.name as user_name',
                                 'users.avatar as avatar'

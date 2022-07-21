@@ -70,6 +70,8 @@ Route::group(['middleware' => 'user'], function () {
     //recharge history
     Route::get('/recharges-history',[AdminController::class,'getRechargeHistory'])->name('recharges.history');
     //order history
+    Route::get('/view-status/{id}',[AdminController::class,'viewStatus'])->name('view.status');
+    Route::post('/update-status/{id}',[AdminController::class,'updateStatus'])->name('update.status');
     Route::get('/order-history',[AdminController::class,'history'])->name('order.history');
     // banks
     Route::resource('banks', BanksController::class);
