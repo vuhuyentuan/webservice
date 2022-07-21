@@ -34,12 +34,12 @@ class OrderController extends Controller
                     'msg' => 'Vui lòng nhập ID hoặc link!'
                 ]);
             }
-            // if(Auth::user()->amount < $request->amount){
-            //     return response()->json([
-            //         'success' => false,
-            //         'msg' => 'Số dư của bạn không đủ để đặt đơn hàng này!'
-            //     ]);
-            // }
+            if(Auth::user()->amount < $request->amount){
+                return response()->json([
+                    'success' => false,
+                    'msg' => 'Số dư của bạn không đủ để đặt đơn hàng này!'
+                ]);
+            }
             $this->repository->store($request, $service_id);
             return response()->json([
                 'success' => true,
