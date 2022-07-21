@@ -17,6 +17,7 @@ $(document).on('click', 'input[name="service_pack"]:checked', function(){
         }else{
             $('#vip_content').html('');
         }
+        $('#description').html(data.service_pack.description);
         total();
     });
 
