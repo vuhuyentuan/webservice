@@ -15,6 +15,11 @@ class OrderRepository
         return Service::where('slug', $slug)->first();
     }
 
+    public function getServiceBill($id)
+    {
+        return ServiceBill::find($id);
+    }
+
     public function getServicePack($id){
         return ServicePack::find($id);
     }

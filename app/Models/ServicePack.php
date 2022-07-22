@@ -15,4 +15,8 @@ class ServicePack extends Model
         return $this->belongsTo(Service::class,'service_id', 'id');
     }
 
+    public function service_bills()
+    {
+        return $this->hasMany(ServiceBill::class,'service_pack_id', 'id');
+    }
 }

@@ -25,7 +25,6 @@
         </table>
     </div>
 </div>
-<div class="modal fade service_pack_modal" id="service_pack_modal" tabindex="-1" role="dialog" ></div>
 <script>
  $(document).ready(function (e) {
     $.ajaxSetup({

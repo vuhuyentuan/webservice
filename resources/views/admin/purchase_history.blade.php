@@ -162,6 +162,51 @@
                 {"data": "status", class: 'text-center', orderable: false },
             ]
         });
+
+        $(document).on('click', '#purchase_history_table tbody tr td:not(:last-child, .bg-row-child)', function() {
+            var tr = $(this).closest('tr');
+            var row = $('#purchase_history_table').DataTable().row(tr);
+            if (row.child.isShown()) {
+                $('div.slide', row.child()).slideUp(function() {
+                    tr.removeClass('bg-row');
+
+                    row.child.hide();
+                });
+
+            } else {
+                $('tr.bg-row').removeClass('bg-row');
+                $('#purchase_history_table').DataTable().rows().every(function() {
+                    var rows = this;
+                    if (rows.child.isShown()) {
+                        rows.child.hide();
+                    }
+                });
+                tr.addClass('bg-row');
+
+                row.child(getService(row.data()), 'no-padding bg-row-child').show();
+                $('div.slide', row.child()).slideDown("fast");
+            }
+
+        });
+
+        function getService(rowData) {
+            var div = $('<div class="slide"/>')
+                .addClass('loading')
+                .text('Loading...');
+            $.ajax({
+                url: "{{ route('order.show') }}",
+                data: {
+                    id: rowData.id
+                },
+                dataType: 'html',
+                success: function(data) {
+                    div.html(data).removeClass('loading');
+                    $('.bg-row-child').attr('data-id', rowData.id)
+                },
+            });
+
+            return div;
+        }
     });
 </script>
 @endsection

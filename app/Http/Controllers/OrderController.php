@@ -85,4 +85,10 @@ class OrderController extends Controller
             ]);
         }
     }
+
+    public function historyShow(Request $request)
+    {
+        $service_bill = $this->repository->getServiceBill($request->id);
+        return view('show.show_history', compact('service_bill'))->render();
+    }
 }

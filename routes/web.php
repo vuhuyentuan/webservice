@@ -90,6 +90,7 @@ Route::group(['middleware' => 'login'], function () {
     Route::get('/recharge',[UserController::class,'recharge'])->name('recharge');
     Route::get('/recharge-history',[UserController::class,'getRechargeHistory'])->name('recharge.history');
     //order history
+    Route::get('/order-show',[OrderController::class,'historyShow'])->name('order.show');
     Route::get('/user-order-history',[UserController::class,'history'])->name('user.order.history');
     // order
     Route::get('/service/{slug}',[OrderController::class,'getService'])->name('order.get-service');

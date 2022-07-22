@@ -22,15 +22,15 @@ div.slide{
     display: none;
 }
 
-.bg-row {
+#purchase_history_table .bg-row {
     background: rgba(186,215,232,0.7);
-    border: 2px solid #49c5b6;
+    border: 2px solid #187afa;
     border-bottom: none
 
 }
 .bg-row-child {
     /* background: rgba(186,215,232,0.5); */
-    border: 2px solid #49c5b6;
+    border: 2px solid #187afa;
     border-top:none
 }
 

@@ -192,6 +192,7 @@ class UserController extends Controller
 
                     return $html;
                 })
+                ->editColumn('quantity', '{{@number_format($quantity)}}')
                 ->editColumn('amount', '{{@number_format($amount)}} đ')
                 ->editColumn('created_at', '{{date("d/m/Y H:i", strtotime($created_at))}}')
                 ->rawColumns(['avatar','status', 'created_at', 'service'])

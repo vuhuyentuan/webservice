@@ -69,8 +69,9 @@
             </div>
             <!-- /.col -->
         </div>
-        <div class="modal fade service_modal" id="service_modal" tabindex="-1" role="dialog"></div>
     </div><!-- /.container-fluid -->
+    <div class="modal fade service_modal" id="service_modal" tabindex="-1" role="dialog"></div>
+    <div class="modal fade service_pack_modal" id="service_pack_modal" tabindex="-1" role="dialog" ></div>
 </section>
 <!-- /.content -->
 @endsection
