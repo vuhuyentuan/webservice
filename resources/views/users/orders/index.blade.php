@@ -101,7 +101,7 @@
                     <div class="card-body">
                         <div class="info-box bg-danger">
                             <div class="info-box-content">
-                              <span class="info-box-number">{{$service->description}}</span>
+                              <span class="info-box-number">{!! $service->description !!}</span>
                             </div>
                             <!-- /.info-box-content -->
                           </div>
