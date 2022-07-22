@@ -52,7 +52,7 @@
                             @if (!empty($service->service_pack))
                             @foreach ($service->service_pack as $service_pack)
                             <div class="custom-control custom-radio">
-                                <input class="custom-control-input" type="radio" id="customRadio{{$service_pack->id}}" name="service_pack" data-price="{{$service_pack->price}}" data-name="{{$service_pack->name}}" value="{{$service_pack->id}}">
+                                <input class="custom-control-input" type="radio" id="customRadio{{$service_pack->id}}" name="service_pack" data-price="{{$service_pack->price}}" data-name="{{$service_pack->name}}"value="{{$service_pack->id}}">
                                 <label for="customRadio{{$service_pack->id}}" class="custom-control-label">{{$service_pack->name}}&nbsp;&nbsp;<small class="badge badge-success"> {{number_format($service_pack->price)}}đ</small></label>
                             </div>
                             @endforeach
@@ -86,7 +86,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12" style="text-align: center">
-                                <button type="submit" class="btn btn-primary text-center" id="order_submit"> Đặt đơn hàng</button>
+                                <button type="submit" class="btn btn-primary text-center" id="order_submit"><i class="fas fa-cart-plus"></i> Đặt đơn hàng</button>
                             </div>
                         </div>
                     </form>

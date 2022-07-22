@@ -30,16 +30,31 @@ class OrderController extends Controller
     public function order(Request $request, $service_id){
         try {
             if(empty($request->url)){
-                return response()->json([
-                    'success' => false,
-                    'msg' => 'Vui lòng nhập ID hoặc link!'
-                ]);
+                return response()->json(['success' => false, 'msg' => 'Vui lòng nhập ID hoặc link!']);
             }
             if(empty($request->service_pack)){
-                return response()->json([
-                    'success' => false,
-                    'msg' => 'Vui lòng chọn gói dịch vụ!'
-                ]);
+                return response()->json(['success' => false, 'msg' => 'Vui lòng chọn gói dịch vụ!']);
+            }
+            if($request->type == 'feeling'){
+                if(empty($request->feeling)){
+                    return response()->json(['success' => false, 'msg' => 'Vui lòng chọn cảm xúc!']);
+                }
+            }else if($request->type == 'comment'){
+                if(empty($request->comment)){
+                    return response()->json(['success' => false, 'msg' => 'Vui lòng nhập nội dung bình luận!']);
+                }
+            }else if ($request->type == 'eyes'){
+                if(empty($request->eyes)){
+                    return response()->json(['success' => false, 'msg' => 'vui lòng nhập thời gian!']);
+                }
+            }
+            if($request->vip = 'vip'){
+                if(empty($request->vip)){
+                    return response()->json(['success' => false, 'msg' => 'vui lòng nhập số ngày!']);
+                }
+            }
+            if(empty($request->quantity) && $request->type != 'comment'){
+                return response()->json(['success' => false, 'msg' => 'Vui lòng nhập số lượng!']);
             }
             if(Auth::user()->amount < $request->amount){
                 return response()->json([

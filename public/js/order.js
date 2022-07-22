@@ -1,3 +1,5 @@
+let type
+let vip
 $(document).on('click', 'input[name="service_pack"]:checked', function(){
     let id = $(this).val();
     $.get('/service-pack/'+id, function(data){
@@ -5,15 +7,19 @@ $(document).on('click', 'input[name="service_pack"]:checked', function(){
         if(data.service_pack.feeling == 'show'){
             $('#type_content').html(data.type_html);
             $('#quantity_content').html(data.quantity_html);
+            type = 'feeling'
         }else if(data.service_pack.comment == 'show'){
             $('#type_content').html(data.type_html);
             $('#quantity_content').html('');
+            type = 'comment'
         }else if (data.service_pack.eyes == 'show'){
             $('#type_content').html(data.type_html);
             $('#quantity_content').html(data.quantity_html);
+            type = 'eyes'
         }
         if(data.service_pack.vip == 'show'){
             $('#vip_content').html(data.vip_html);
+            vip = 'vip'
         }else{
             $('#vip_content').html('');
         }
@@ -76,6 +82,8 @@ $('form#order_form').submit(function(e) {
     data.append('amount', total_amount);
     data.append('total_lines', total_lines);
     data.append('service_pack_name', service_pack_name);
+    data.append('type', type);
+    data.append('vip', vip);
     $.ajax({
         method: 'POST',
         url: $(this).attr('action'),
