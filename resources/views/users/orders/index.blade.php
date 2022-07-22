@@ -60,7 +60,7 @@
                             </div>
                             <div class="col-sm-12">
                                 <div class="alert1 alert-danger">
-                                    <strong><i class="fas fa-exclamation-circle" style="padding-right: 10px"></i> <b id="description">Vui lòng chọn gọi dịch vụ cần mua</b></strong>
+                                    <strong><i class="fas fa-exclamation-circle" style="padding-right: 5px"></i> <b id="description">Vui lòng chọn gọi dịch vụ cần mua</b></strong>
                                 </div>
                             </div>
                         </div>
