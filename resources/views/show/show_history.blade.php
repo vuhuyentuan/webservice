@@ -88,7 +88,7 @@
                         <div class="col-md-6 col-lg-4 col-5">
                             <strong>Bình luận:</strong>
                         </div>
-                        <div class="col-md-6 col-lg-8 col-7" style="max-height: calc(100vh - 500px); overflow-y: auto; background-color: #dbe6e6">
+                        <div class="col-md-6 col-lg-8 col-7" style="max-height: calc(100vh - 480px); overflow-y: auto; background-color: #dbe6e6">
                             @foreach (json_decode($service_bill->comment) as $comment)
                                 {{ $comment }} <br>
                             @endforeach
