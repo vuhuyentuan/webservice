@@ -86,6 +86,9 @@
     </div>
 </div>
 <script>
+    $(function () {
+        $('#description').summernote();
+    })
     $('.select2').select2({
         dropdownParent: $('#service_edit_form')
     });

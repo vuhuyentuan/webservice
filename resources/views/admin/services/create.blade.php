@@ -60,7 +60,7 @@
                             <div class="card-body p-0" style="display: block;">
                                 <div class="row">
                                     <div class="col-12">
-                                        <textarea name="description" id="description" class="form-control" rows="10"></textarea>
+                                        <textarea name="description" id="description"></textarea>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -77,6 +77,9 @@
     </div>
 </div>
 <script>
+    $(function () {
+        $('#description').summernote();
+    })
     $('.select2').select2({
         dropdownParent: $('#service_add_form')
     });

@@ -1,6 +1,6 @@
 <div class="form-group row">
     <div class="col-sm-3">
-        <label class="form-control-label" for="basic-url">Loại cảm xúc</label>
+        <label class="form-control-label" for="basic-url">Loại cảm xúc <b class="text-danger">*</b></label>
     </div>
     <div class="col-sm-9" id="feeling">
         <div class="form-check form-check-inline">

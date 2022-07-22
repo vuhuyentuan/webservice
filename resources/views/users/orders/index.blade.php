@@ -35,18 +35,18 @@
         <section class="col-lg-8 connectedSortable ui-sortable">
             <div class="card card-primary card-outline">
                 <div class="card-header">
-                    <h3 class="card-title">Thêm đơn</h3>
+                    <h3 class="card-title"><b>Thêm đơn</b></h3>
                 </div> <!-- /.card-body -->
                 <div class="card-body">
                     <form action="{{ route('order.order-service-pack', $service->id) }}" method="POST" enctype="multipart/form-data" id="order_form">
                         @csrf
                         <div class="form-group row">
-                            <label class="form-control-label col-lg-3" for="basic-url">Nhập ID hoặc Link</label>
+                            <label class="form-control-label col-lg-3" for="basic-url">Nhập ID hoặc Link <b class="text-danger">*</b></label>
                             <input type="text" class="form-control col-lg-9" name="url" id="url" placeholder="Nhập ID hoặc Link tùy theo gói">
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-3">
-                                <label class="form-control-label" for="basic-url">Gói dịch vụ</label>
+                                <label class="form-control-label" for="basic-url">Gói dịch vụ <b class="text-danger">*</b></label>
                             </div>
                             <div class="form-group col-sm-9">
                             @if (!empty($service->service_pack))
@@ -96,9 +96,15 @@
         <section class="col-lg-4 connectedSortable ui-sortable">
                 <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <h3 class="card-title">Lưu ý</h3>
+                        <h3 class="card-title"><b>Lưu ý</b></h3>
                     </div> <!-- /.card-body -->
                     <div class="card-body">
+                        <div class="info-box bg-danger">
+                            <div class="info-box-content">
+                              <span class="info-box-number">{{$service->description}}</span>
+                            </div>
+                            <!-- /.info-box-content -->
+                          </div>
                     </div><!-- /.card-body -->
                 </div>
         </section>

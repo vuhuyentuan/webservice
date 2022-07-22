@@ -51,6 +51,7 @@ function total(){
             if (lines[i].length > 0) lineCount++;
         }
         total_lines = lineCount;
+        $('#comment_line_number').html(lineCount);
         total = service_pack * lineCount;
     }else if($('#eyes').length > 0){
         let eyes = $('#eyes').val();

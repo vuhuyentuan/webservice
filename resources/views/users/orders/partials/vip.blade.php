@@ -1,5 +1,5 @@
 <div class="form-group row">
-    <label class="form-control-label col-lg-3" for="basic-url">Số ngày</label>
+    <label class="form-control-label col-lg-3" for="basic-url">Số ngày <b class="text-danger">*</b></label>
     <select class="form-control col-lg-9" id="vip" style="width: 100%;">
         <option value="7" selected="selected">7 ngày</option>
         <option value="15">15 ngày</option>

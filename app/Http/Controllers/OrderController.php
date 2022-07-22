@@ -53,7 +53,7 @@ class OrderController extends Controller
                     return response()->json(['success' => false, 'msg' => 'vui lòng nhập số ngày!']);
                 }
             }
-            if(empty($request->quantity) && $request->type != 'comment'){
+            if($request->type != 'comment' && empty($request->quantity)){
                 return response()->json(['success' => false, 'msg' => 'Vui lòng nhập số lượng!']);
             }
             if(Auth::user()->amount < $request->amount){
