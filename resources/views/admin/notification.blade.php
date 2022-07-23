@@ -1,6 +1,5 @@
 <span class="dropdown-item dropdown-header">
-    <span class="float-left text-muted text-sm">Có {{ $count }} đơn hàng</span>
-    <a href="#" style="color: rgb(35, 138, 216)" class="float-right text-muted text-sm markAllAsRead">Đánh dấu đã đọc</a>
+    Có {{ $count }} đơn hàng
 </span>
 @foreach ($notifications as $notifi)
 @php
@@ -15,5 +14,5 @@
     <p class="{{ $active }} mess" style="word-wrap: break-word;color: rgb(35, 138, 216)">{{ $noti->message }}</p>
 </a>
 @endforeach
-{{-- <div class="dropdown-divider"></div>
-<a href="#" class="dropdown-item dropdown-footer">Xem tất cả đơn hàng</a> --}}
+<div class="dropdown-divider"></div>
+<a href="#" class="dropdown-item dropdown-footer markAllAsRead">Đánh dấu đã đọc</a>
