@@ -12,7 +12,7 @@
                     <h6>{{ date('d/m/Y', strtotime($dates[$i])) }}</h6>
                 </td>
                 <td style="text-align: center">
-                    <h6>{{ $arrRevenueMonthDone[$i] }} vnđ </h6>
+                    <h6>{{ $arrRevenueMonthDone[$i] }} VNĐ </h6>
                 </td>
             </tr>
         @endfor
