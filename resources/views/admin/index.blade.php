@@ -66,7 +66,7 @@
         <!-- ./col -->
         <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-info">
+            <div class="small-box bg-orange">
               <div class="inner">
                 <h3 id="user_number">0</h3>
 
