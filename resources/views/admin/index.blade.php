@@ -11,10 +11,19 @@
           <h1 class="m-0">Dashboard</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Dashboard</li>
-          </ol>
+            <form>
+                <div class="row" style="float: right;">
+                    <div class="col-12" style="padding-left: 0px;padding-right: 2px; margin-bottom: 3px">
+                        <div class="input-group date" id="daterangepicker"
+                            style="margin-left: 0px; padding-left: 0px;padding-right: 2px; margin-bottom: 3px">
+                            <input class="form-control" id="date" data-date-format="yyyy-mm-dd" name="dates"
+                                type="text"
+                                value="{{ date('d/m/Y', strtotime($first_day)) . ' - ' . date('d/m/Y', strtotime($last_day)) }}">
+                            <span class="input-group-addon"><i class="fas fa-calendar" style="position:absolute; bottom:4px; right:15px; height:24px; color: #495057;opacity:0.7"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div><!-- /.col -->
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
@@ -30,14 +39,14 @@
           <!-- small box -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3>150</h3>
+              <h3 id="service_bill_pending">0</h3>
 
-              <p>New Orders</p>
+              <p>Đơn hàng đang chờ</p>
             </div>
             <div class="icon">
-              <i class="ion ion-bag"></i>
+                <i class="fas fa-shopping-cart"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="{{route('order.history')}}" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -45,51 +54,50 @@
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-              <p>Bounce Rate</p>
+              <h3 id="service_bill_done">0</h3>
+              <p>Đơn hàng thành công</p>
             </div>
             <div class="icon">
-              <i class="ion ion-stats-bars"></i>
+                <i class="fas fa-cart-plus"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="{{route('order.history')}}" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3 id="user_number">0</h3>
+
+                <p>Thành viên</p>
+              </div>
+              <div class="icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <a href="{{route('users.index')}}" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
         <div class="col-lg-3 col-6">
           <!-- small box -->
           <div class="small-box bg-warning">
             <div class="inner">
-              <h3>44</h3>
+              <h3 id="total_revenue_from_to_date">0</h3>
 
-              <p>User Registrations</p>
+              <p>Tổng doanh thu</p>
             </div>
             <div class="icon">
-              <i class="ion ion-person-add"></i>
+                <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-danger">
-            <div class="inner">
-              <h3>65</h3>
-
-              <p>Unique Visitors</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-pie-graph"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="{{route('dashboard')}}" class="small-box-footer">Chi tiết <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
       </div>
       <!-- /.row -->
     </div><!-- /.container-fluid -->
-    <div class="container-fluid">
+    {{-- <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -101,7 +109,7 @@
                 <!-- /.card-header -->
                 <div class="card-body">
                     <center>
-                        <h3>Tổng doanh thu: <b> {{ $totalRevenueFromToDate }} VNĐ </b></h3>
+                        <h3>Tổng doanh thu: <b id="total_revenue_from_to_date">0</b><b> VNĐ</b></h3>
                     </center>
                 </div>
                 <!-- /.card-body -->
@@ -110,7 +118,7 @@
             </div>
             <!-- /.col -->
         </div>
-    </div><!-- /.container-fluid -->
+    </div><!-- /.container-fluid --> --}}
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
@@ -122,43 +130,11 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form action="{{ route('admin.search') }}" id="" enctype="multipart/form-data" method="post">
-                        @csrf
-                        <div class="row" style="margin-left: 2px">
-                            <div class="col-3" style="padding-left: 0px;padding-right: 2px; margin-bottom: 3px">
-                                <div class="input-group date" id="daterangepicker"
-                                    style="margin-left: 0px; padding-left: 0px;padding-right: 2px; margin-bottom: 3px">
-                                    <input class="form-control" name="dates" id="date" data-date-format="yyyy-mm-dd" name="dates"
-                                        type="text"
-                                        value="{{ date('d/m/Y', strtotime($first_day)) . ' - ' . date('d/m/Y', strtotime($last_day)) }}">
-                                    <span class="input-group-addon"><i class="fas fa-calendar" style="position:absolute; bottom:4px; right:15px; height:24px; color: #495057;opacity:0.7"></i></span>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <button class="btn btn-default" id="btnsearch" type="submit"><i class="fas fa-search" style="color: black"></i></button>
-                            </div>
-                        </div>
-                    </form>
-                    <table id="statistical_table" class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th style="text-align: center; ">Ngày</th>
-                            <th style="text-align: center; ">Doanh thu</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @for ($i = 0; $i < count($arrRevenueMonthDone); $i++)
-                            <tr role="row">
-                                <td style="text-align: center">
-                                    <h6>{{ date('d/m/Y', strtotime($dates[$i])) }}</h6>
-                                </td>
-                                <td style="text-align: center">
-                                    <h6>{{ $arrRevenueMonthDone[$i] }} vnđ </h6>
-                                </td>
-                            </tr>
-                        @endfor
-                    </tbody>
-                    </table>
+
+                    <div id="statistical_content">
+
+                    </div>
+
                 </div>
                 <!-- /.card-body -->
                 </div>
@@ -173,41 +149,44 @@
 @endsection
 @section('script')
 <script>
-    $('#statistical_table').DataTable({
-        "destroy": true,
-        "lengthChange": false,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
-        "pageLength": 15,
-        "pagingType": "full_numbers",
-        "language": {
-            "info": 'Hiển thị _START_ đến _END_ của _TOTAL_ mục',
-            "infoEmpty": 'Hiển thị 0 đến 0 của 0 mục',
-            "infoFiltered": '',
-            "infoPostFix": "",
-            "thousands": ",",
-            "lengthMenu": 'Hiển thị _MENU_ mục',
-            "loadingRecords": 'Đang tải...',
-            "processing": 'Đang xử lý...',
-            "emptyTable": 'Không có dữ liệu',
-            "zeroRecords": 'Không tìm thấy kết quả',
-            "search": 'Tìm kiếm',
-            "paginate": {
-                'first': '<i class="fa fa-angle-double-left"></i>',
-                'previous': '<i class="fa fa-angle-left" ></i>',
-                'next': '<i class="fa fa-angle-right" ></i>',
-                'last': '<i class="fa fa-angle-double-right"></i>'
+    $(document).ready(function(){
+        $.ajax({
+            method: 'GET',
+            url: "{{ route('dashboard') }}",
+            dataType: 'json',
+            data: {
+                dates: $('#date').val()
             },
-        }
-    });
-
+            success: function(result) {
+                $('#service_bill_pending').html(result.data.service_bill_pending)
+                $('#service_bill_done').html(result.data.service_bill_done)
+                $('#user_number').html(result.data.user)
+                $('#total_revenue_from_to_date').html(result.data.totalRevenueFromToDate)
+                $('#statistical_content').html(result.table);
+            },
+        });
+    })
     $('input[name="dates"]').daterangepicker({
             locale: {
                 format: 'DD/MM/YYYY'
             }
         });
+    $(document).on('change', '#daterangepicker', function(){
+        $.ajax({
+            method: 'GET',
+            url: "{{ route('dashboard') }}",
+            dataType: 'json',
+            data: {
+                dates: $('#date').val()
+            },
+            success: function(result) {
+                $('#service_bill_pending').html(result.data.service_bill_pending)
+                $('#service_bill_done').html(result.data.service_bill_done)
+                $('#user_number').html(result.data.user);
+                $('#total_revenue_from_to_date').html(result.data.totalRevenueFromToDate)
+                $('#statistical_content').html(result.table);
+            },
+        });
+    })
 </script>
 @endsection

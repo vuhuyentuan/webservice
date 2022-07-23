@@ -46,7 +46,7 @@ class LoginController extends Controller
                 return redirect()->route('user.dashboard');
             }
         } else {
-            return redirect()->back()->with('message', 1);
+            return redirect()->back()->with(['message'=> 1, 'data'=>$request->username]);
         }
     }
 

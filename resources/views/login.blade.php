@@ -32,7 +32,7 @@
                   <span class="fas fa-user"></span>
                 </div>
             </div>
-            <input type="text" class="form-control" placeholder="Tên đăng nhập" name="username">
+            <input type="text" class="form-control" placeholder="Tên đăng nhập" name="username" id="username">
         </div>
         <div class="input-group mb-3">
             <div class="input-group-append">
@@ -97,7 +97,9 @@
     $(document).ready(function () {
         var msg = "{{Session::get('message')}}";
         var exist = "{{Session::has('message')}}";
+        var data = "{{Session::get('data')}}";
         if (exist && msg == '1') {
+            $('#username').val(data);
             toastr.error('Tài khoản hoặc mật khẩu không chính xác');
         }
     })
