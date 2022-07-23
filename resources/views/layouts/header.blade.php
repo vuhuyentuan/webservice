@@ -111,7 +111,7 @@
           <i class="far fa-bell"></i>
           <span class="badge badge-warning navbar-badge count-notification">{{ $countUnread }}</span>
         </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right notification">
           <span class="dropdown-item dropdown-header">
             Có {{ $countUnread }} đơn hàng
             {{-- <a href="#" style="color: rgb(35, 138, 216)" class="float-right text-muted text-sm markAllAsRead">Đánh dấu đã đọc</a> --}}
