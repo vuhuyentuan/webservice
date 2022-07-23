@@ -147,7 +147,7 @@
                 url: '/notifications',
                 success: function(result){
                     $('.count-notification').html(result.count);
-                    $('.dropdown-menu').html(result.html);
+                    $('.notification').html(result.html);
                 }
             })
         }, 15000)
