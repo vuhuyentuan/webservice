@@ -99,12 +99,12 @@
                         <h3 class="card-title"><b>Lưu ý</b></h3>
                     </div> <!-- /.card-body -->
                     <div class="card-body">
-                        <div class="info-box bg-danger">
-                            <div class="info-box-content">
+                        {{-- <div class="info-box bg-danger"> --}}
+                            <div class="info-box-content" style="font-weight: 600; color: red;">
                               <span class="info-box-number">{!! $service->description !!}</span>
                             </div>
                             <!-- /.info-box-content -->
-                          </div>
+                          {{-- </div> --}}
                     </div><!-- /.card-body -->
                 </div>
         </section>
