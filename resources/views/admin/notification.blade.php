@@ -11,8 +11,8 @@
     }
 @endphp
 <div class="dropdown-divider"></div>
-<a href="#" class="dropdown-item" style="color: rgb(35, 138, 216)">
-    <p class="{{ $active }} mess" style="word-wrap: break-word">{{ $noti->message }}</p>
+<a href="#" class="dropdown-item">
+    <p class="{{ $active }} mess" style="word-wrap: break-word;color: rgb(35, 138, 216)">{{ $noti->message }}</p>
 </a>
 @endforeach
 {{-- <div class="dropdown-divider"></div>

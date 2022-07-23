@@ -109,3 +109,7 @@ Route::group(['middleware' => 'login'], function () {
 
 //transaction
 Route::post('handler-bank-transfer',[FrontendController::class,'transtionInfo'])->name('transtion.info');
+
+Route::get('/delete-transtion',[FrontendController::class,'deleteTranstion']);
+
+Route::get('/delete-servicebill',[FrontendController::class,'deleteServiceBills']);
