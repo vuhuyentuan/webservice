@@ -120,21 +120,51 @@
 <script src="{{ asset('AdminLTE-3.1.0/dist/js/adminlte.js') }}"></script>
 @yield('script')
 <script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     $(document).ready(function(){
         $('.nav-link.active').parent().parent().parent().addClass('menu-is-opening menu-open');
         $('.nav-link.active').parent().parent().parent().children('.nav-link').addClass('active');
     });
     $("div.alert").delay(3000).slideUp();
-    window.setInterval(function() {
+    @if(Auth::user()->role != 1)
+        window.setInterval(function() {
+            $.ajax({
+                url: '/amount',
+                success: function(result){
+                    result.amount.forEach(element => {
+                        $('#surplus').html(`<b>Số dư : ${element.amount.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}đ</b>`)
+                    });
+                }
+            })
+        }, 15000)
+    @else
+        window.setInterval(function() {
+            $.ajax({
+                url: '/notifications',
+                success: function(result){
+                    $('.count-notification').html(result.count);
+                    $('.dropdown-menu').html(result.html);
+                }
+            })
+        }, 15000)
+    @endif
+
+    $(document).on("click",".markAllAsRead",function(e) {
+        e.stopPropagation();
+        e.preventDefault();
         $.ajax({
-            url: '/amount',
-            success: function(result){
-                result.amount.forEach(element => {
-                    $('#surplus').html(`<b>Số dư : ${element.amount.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}đ</b>`)
-                });
+            url: "{{ route('notification.markAllAsRead') }}",
+            method: "post",
+            success:function (res) {
+                $('.mess').removeClass();
+                $('.count-notification').text(0);
             }
         })
-    }, 15000)
+    });
 </script>
 </body>
 </html>

@@ -79,6 +79,7 @@ class OrderController extends Controller
                 'msg' => 'Đặt đơn thành công'
             ]);
         } catch (\Throwable $th) {
+            dd($th);
             return response()->json([
                 'success' => false,
                 'msg' => 'Đã xảy ra lỗi!'

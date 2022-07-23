@@ -24,4 +24,14 @@ class ServiceBill extends Model
     {
         return $this->belongsTo(ServicePack::class,'service_pack_id', 'id');
     }
+
+    public function fillByAttr($attributes , $input)
+    {
+        if(!empty($attributes)){
+            foreach ( $attributes as $item ){
+                $this->$item = isset($input[$item]) ? ($input[$item]) : null;
+            }
+        }
+    }
+
 }

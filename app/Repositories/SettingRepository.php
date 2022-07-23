@@ -25,7 +25,7 @@ class SettingRepository
         $date = Carbon::now()->format('d-m-Y');
         $logo = $request->logo;
         if (isset($logo)) {
-            if (isset($setting->logo)) {
+            if (isset($setting->logo) && $setting->logo != 'AdminLTE-3.1.0/dist/img/AdminLTELogo.png') {
                 unlink(public_path($setting->logo));
             }
             $logo_name = 'upload/setting/img/' . $date . '/' . Str::random(10) . rand() . '.' . $logo->getClientOriginalExtension();
@@ -36,7 +36,7 @@ class SettingRepository
         }
         $banner = $request->banner;
         if (isset($banner)) {
-            if (isset($setting->banner)) {
+            if (isset($setting->banner) && $setting->logo != 'AdminLTE-3.1.0/dist/img/bg7.jpg') {
                 unlink(public_path($setting->banner));
             }
             $banner_name = 'upload/setting/img/' . $date . '/' . Str::random(10) . rand() . '.' . $banner->getClientOriginalExtension();

@@ -8,6 +8,7 @@ use App\Models\ServicePack;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use App\Events\CreatedServicesEvent;
 
 class OrderRepository
 {
@@ -68,6 +69,7 @@ class OrderRepository
         }
         $bill->amount = $request->amount;
         $bill->save();
+
         // user
         $user = User::find(Auth()->user()->id);
         $amount_old = $user->amount;
@@ -81,5 +83,7 @@ class OrderRepository
         $history->content = $bill->service->name . ' - ' . $request->service_pack_name;
         $history->volatility = number_format($amount_old) . ' -> ' . number_format($user->amount);
         $history->save();
+
+        event(new CreatedServicesEvent($bill));
     }
 }

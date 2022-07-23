@@ -7,6 +7,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServicePackController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BanksController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,10 @@ Route::get('/logout',[LoginController::class,'logout'])->name('logout');
 Route::group(['middleware' => 'user'], function () {
     Route::get('/dashboard',[AdminController::class,'index'])->name('dashboard');
     Route::post('/dashboard',[AdminController::class,'index'])->name('admin.search');
+    //notification
+    Route::post('/markAsRead',[NotificationController::class,'markAsRead'])->name('notification.markAsRead');
+    Route::post('/markAllAsRead',[NotificationController::class,'markAllAsRead'])->name('notification.markAllAsRead');
+    Route::get('/notifications',[NotificationController::class,'loadNotify'])->name('notification.loadNotify');
     //users
     Route::get('/users/create',[UserController::class,'create'])->name('users.create');
     Route::post('/users/store',[UserController::class,'store'])->name('users.store');
