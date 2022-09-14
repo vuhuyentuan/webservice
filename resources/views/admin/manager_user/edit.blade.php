@@ -128,7 +128,7 @@
         }
     });
 
-    $(document).on('click', '.submit_edit', function(e) {
+    $('.submit_edit').on('click', function(e) {
         e.preventDefault();
         if ($('form#user_edit_form').valid() == true) {
             $('.submit_edit').attr('disabled', true);
